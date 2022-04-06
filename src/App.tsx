@@ -7,13 +7,13 @@ export default function App() {
         <h1 className="text-4xl text-center">Wordle</h1>
       </header>
 
-      <main>
+      <main className="grid grid-rows-6 gap-4">
         <WordRow letters="hello" />
-        <WordRow letters="hello" />
-        <WordRow letters="hello" />
-        <WordRow letters="hello" />
-        <WordRow letters="hello" />
-        <WordRow letters="hello" />
+        <WordRow letters="heart" />
+        <WordRow letters="jumps" />
+        <WordRow letters="kinda" />
+        <WordRow letters="tough" />
+        <WordRow letters="laugh" />
       </main>
     </div>
   );

@@ -60,10 +60,19 @@ describe("computeGuess", () => {
   it("only shows one present when letter is guessed multiple times", () => {
     expect(computeGuess("alloy", "linux")).toEqual([
       LetterState.Miss,
+      LetterState.Miss,
       LetterState.Present,
       LetterState.Miss,
       LetterState.Miss,
+    ]);
+  });
+  it("shows unmatched letter instance as miss when letter is guessed multiple times and matched/present only once", () => {
+    expect(computeGuess("there", "arise")).toEqual([
       LetterState.Miss,
+      LetterState.Miss,
+      LetterState.Miss,
+      LetterState.Present,
+      LetterState.Match,
     ]);
   });
 });

@@ -1,5 +1,8 @@
 import wordBank from "./word-bank.json";
 
+const word = getRandomWord();
+console.log(word);
+
 export function getRandomWord() {
   const randomIndex = Math.floor(Math.random() * wordBank.length);
   return wordBank[randomIndex];
@@ -13,7 +16,7 @@ export enum LetterState {
 
 export function computeGuess(
   guess: string,
-  answerString: string
+  answerString: string = word
 ): LetterState[] {
   const result: LetterState[] = [];
 
@@ -23,8 +26,8 @@ export function computeGuess(
     return result;
   }
 
-  const guessArray = guess.split("");
-  const answerArray = answerString.split("");
+  const guessArray = guess.split("").reverse();
+  const answerArray = answerString.split("").reverse();
 
   guessArray.forEach((letter, index) => {
     if (letter === answerArray[index]) {
@@ -42,5 +45,5 @@ export function computeGuess(
     }
   });
 
-  return result;
+  return result.reverse();
 }
