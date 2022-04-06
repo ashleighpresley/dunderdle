@@ -1,9 +1,69 @@
 import { describe, expect, it } from "vitest";
-import { getRandomWord } from "./word-utils";
+import { computeGuess, getRandomWord, LetterState } from "./word-utils";
 
-describe("word-utils", () => {
-  it("random word", () => {
+describe("getRandomWord", () => {
+  it("gets a random word", () => {
     expect(getRandomWord()).toBeTruthy();
     expect(getRandomWord()).toHaveLength(5);
+  });
+});
+
+describe("computeGuess", () => {
+  it("returns an empty array when given incomplete guess", () => {
+    expect(computeGuess("so", "basic")).toEqual([]);
+  });
+  it("displays miss, present, and match", () => {
+    expect(computeGuess("boost", "basic")).toEqual([
+      LetterState.Match,
+      LetterState.Miss,
+      LetterState.Miss,
+      LetterState.Present,
+      LetterState.Miss,
+    ]);
+  });
+  it("works with all misses", () => {
+    expect(computeGuess("jumps", "click")).toEqual([
+      LetterState.Miss,
+      LetterState.Miss,
+      LetterState.Miss,
+      LetterState.Miss,
+      LetterState.Miss,
+    ]);
+  });
+  it("works with all present", () => {
+    expect(computeGuess("slope", "poles")).toEqual([
+      LetterState.Present,
+      LetterState.Present,
+      LetterState.Present,
+      LetterState.Present,
+      LetterState.Present,
+    ]);
+  });
+  it("works with all matches", () => {
+    expect(computeGuess("hello", "hello")).toEqual([
+      LetterState.Match,
+      LetterState.Match,
+      LetterState.Match,
+      LetterState.Match,
+      LetterState.Match,
+    ]);
+  });
+  it("only shows one match when two letters are present", () => {
+    expect(computeGuess("solid", "boost")).toEqual([
+      LetterState.Present,
+      LetterState.Match,
+      LetterState.Miss,
+      LetterState.Miss,
+      LetterState.Miss,
+    ]);
+  });
+  it("only shows one present when letter is guessed multiple times", () => {
+    expect(computeGuess("alloy", "linux")).toEqual([
+      LetterState.Miss,
+      LetterState.Present,
+      LetterState.Miss,
+      LetterState.Miss,
+      LetterState.Miss,
+    ]);
   });
 });
