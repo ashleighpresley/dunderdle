@@ -17,7 +17,7 @@ export default function WordRow({
     .concat(Array(lettersRemaining).fill(""));
 
   return (
-    <div className={`grid grid-cols-5 gap-5 ${className}`}>
+    <div className={`grid grid-cols-5 gap-3 ${className}`}>
       {letters.map((char, index) => (
         <CharacterBox key={index} value={char} state={result[index]} />
       ))}
@@ -31,7 +31,11 @@ interface CharacterBoxProps {
 }
 
 function CharacterBox({ value, state }: CharacterBoxProps) {
-  const stateStyles = state == null ? "" : characterStateStyles[state];
+  const stateStyles =
+    state == null
+      ? "border-gray-500 text-black"
+      : `${characterStateStyles[state]} text-white`;
+
   return (
     <span
       className={`inline-block border-2 border-gray-500 p-4

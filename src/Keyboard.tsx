@@ -8,7 +8,6 @@ export default function Keyboard({
   onClick: (letter: string) => void;
 }) {
   const keyboardLetterState = useStore((s) => s.keyboardLetterState);
-  console.log(keyboardLetterState);
   const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const letter = e.currentTarget.textContent;
     onClickProp(letter!);
@@ -27,8 +26,13 @@ export default function Keyboard({
                 styles += " pointer-events-none";
               }
 
-              if (letterState) {
-                styles += ` ${letterState}`;
+              if (
+                letterState === "bg-yellow-500" ||
+                letterState === "bg-green-500"
+              ) {
+                styles += " text-white " + letterState;
+              } else if (letterState === "bg-gray-500") {
+                styles += " text-black " + letterState;
               } else if (key !== "") {
                 styles += " bg-gray-400";
               }
@@ -53,7 +57,7 @@ const keyboardKeys = [
 ];
 
 const keyStateStyles = {
-  [LetterState.Miss]: "bg-gray-500 ",
+  [LetterState.Miss]: "bg-gray-500",
   [LetterState.Present]: "bg-yellow-500",
   [LetterState.Match]: "bg-green-500",
 };
