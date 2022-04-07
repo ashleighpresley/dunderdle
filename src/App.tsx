@@ -50,7 +50,7 @@ export default function App() {
         <div></div>
       </header>
 
-      <main className="grid grid-rows-6 gap-4">
+      <main className="grid grid-rows-6 gap-4 mb-4">
         {rows.map(({ guess, result }, index) => (
           <WordRow
             key={index}
