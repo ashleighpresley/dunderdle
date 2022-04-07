@@ -106,7 +106,7 @@ function useGuess(): [
       const newGuess = letter.length === 1 ? curGuess + letter : curGuess;
 
       switch (letter) {
-        case "Backspace":
+        case "Back":
           return newGuess.slice(0, -1);
         case "Enter":
           if (newGuess.length === LETTER_LENGTH) {
