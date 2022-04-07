@@ -3,11 +3,13 @@ import { LetterState, LETTER_LENGTH } from "./word-utils";
 interface WordRowProps {
   letters: string;
   result?: LetterState[];
+  className?: string;
 }
 
 export default function WordRow({
   letters: lettersProp = "",
   result = [],
+  className = "",
 }: WordRowProps) {
   const lettersRemaining = LETTER_LENGTH - lettersProp.length;
   const letters = lettersProp
@@ -15,7 +17,7 @@ export default function WordRow({
     .concat(Array(lettersRemaining).fill(""));
 
   return (
-    <div className="grid grid-cols-5 gap-5">
+    <div className={`grid grid-cols-5 gap-5 ${className}`}>
       {letters.map((char, index) => (
         <CharacterBox key={index} value={char} state={result[index]} />
       ))}

@@ -46,3 +46,7 @@ export function computeGuess(
 
   return result.reverse();
 }
+
+export function isValidWord(word: string): boolean {
+  return wordBank.includes(word);
+}
