@@ -80,13 +80,13 @@ export default function App() {
             <WordRow letters={state.answer} />
           </div>
           <button
-            className="play-again-btn block border rounded border-green-500 bg-green-500 p-2 mt-4 mx-auto shadow"
+            className="play-again-btn block border rounded border-green-500 bg-green-500 p-2 mt-4 mx-auto shadow text-white"
             onClick={() => {
               state.newGame();
               setGuess("");
             }}
           >
-            Play Again
+            New Game
           </button>
         </div>
       )}

@@ -11,7 +11,7 @@ describe("Simple working test", () => {
   it("shows empty state", () => {
     useStore.getState().newGame([]);
     render(<App />);
-    expect(screen.queryByText("Play Again")).not.toBeInTheDocument();
+    expect(screen.queryByText("New Game")).not.toBeInTheDocument();
     expect(document.querySelectorAll("main div")).toHaveLength(6);
     expect(document.querySelectorAll("main div span")).toHaveLength(30);
     expect(document.querySelector("main")?.textContent).toEqual("");
@@ -19,7 +19,7 @@ describe("Simple working test", () => {
   it("shows one row of guesses", () => {
     useStore.getState().newGame(["hello"]);
     render(<App />);
-    expect(screen.queryByText("Play Again")).not.toBeInTheDocument();
+    expect(screen.queryByText("New Game")).not.toBeInTheDocument();
     expect(document.querySelectorAll("main div")).toHaveLength(6);
     expect(document.querySelectorAll("main div span")).toHaveLength(30);
     expect(document.querySelector("main")?.textContent).toEqual("hello");
@@ -27,16 +27,16 @@ describe("Simple working test", () => {
   it("shows one row of guesses", () => {
     useStore.getState().newGame(["hello"]);
     render(<App />);
-    expect(screen.queryByText("Play Again")).not.toBeInTheDocument();
+    expect(screen.queryByText("New Game")).not.toBeInTheDocument();
     expect(document.querySelectorAll("main div")).toHaveLength(6);
     expect(document.querySelectorAll("main div span")).toHaveLength(30);
     expect(document.querySelector("main")?.textContent).toEqual("hello");
   });
-  it("shows play again button when used up all of guess opportunities", () => {
+  it("shows new game button when used up all of guess opportunities", () => {
     useStore.getState().newGame(Array(6).fill("hello"));
 
     render(<App />);
-    expect(screen.queryByText("Play Again")).toBeInTheDocument();
+    expect(screen.queryByText("New Game")).toBeInTheDocument();
     expect(document.querySelectorAll("main div")).toHaveLength(6);
     expect(document.querySelectorAll("main div span")).toHaveLength(30);
     expect(document.querySelector("main")?.textContent).toEqual(
@@ -60,7 +60,7 @@ describe("Simple working test", () => {
   it("can start a new game", () => {
     useStore.getState().newGame(Array(6).fill("hello"));
     render(<App />);
-    expect(screen.queryByText("Play Again")).toBeInTheDocument();
+    expect(screen.queryByText("New Game")).toBeInTheDocument();
     expect(document.querySelector("main")?.textContent).toEqual(
       "hellohellohellohellohellohello"
     );

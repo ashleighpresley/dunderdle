@@ -53,7 +53,8 @@ export default function Keyboard({
 const keyboardKeys = [
   ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
   ["", "a", "s", "d", "f", "g", "h", "j", "k", "l", ""],
-  ["Enter", "z", "x", "c", "v", "b", "n", "m", "Backspace"],
+  ["", "z", "x", "c", "v", "b", "n", "m", ""],
+  ["BACK", "ENTER"],
 ];
 
 const keyStateStyles = {
