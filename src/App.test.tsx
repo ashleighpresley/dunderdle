@@ -9,49 +9,58 @@ describe("Simple working test", () => {
     expect(screen.getByText(/Wordle/i)).toBeInTheDocument();
   });
   it("shows empty state", () => {
-    useStore.setState({ guesses: [] });
+    useStore.getState().newGame([]);
     render(<App />);
-    expect(screen.queryByText("Game Over!")).not.toBeInTheDocument();
+    expect(screen.queryByText("Play Again")).not.toBeInTheDocument();
     expect(document.querySelectorAll("main div")).toHaveLength(6);
     expect(document.querySelectorAll("main div span")).toHaveLength(30);
     expect(document.querySelector("main")?.textContent).toEqual("");
   });
   it("shows one row of guesses", () => {
-    useStore.setState({ guesses: ["hello"] });
+    useStore.getState().newGame(["hello"]);
     render(<App />);
-    expect(screen.queryByText("Game Over!")).not.toBeInTheDocument();
+    expect(screen.queryByText("Play Again")).not.toBeInTheDocument();
     expect(document.querySelectorAll("main div")).toHaveLength(6);
     expect(document.querySelectorAll("main div span")).toHaveLength(30);
     expect(document.querySelector("main")?.textContent).toEqual("hello");
   });
   it("shows one row of guesses", () => {
-    useStore.setState({
-      guesses: ["hello"],
-    });
+    useStore.getState().newGame(["hello"]);
     render(<App />);
-    expect(screen.queryByText("Game Over!")).not.toBeInTheDocument();
+    expect(screen.queryByText("Play Again")).not.toBeInTheDocument();
     expect(document.querySelectorAll("main div")).toHaveLength(6);
     expect(document.querySelectorAll("main div span")).toHaveLength(30);
     expect(document.querySelector("main")?.textContent).toEqual("hello");
   });
-  it("shows game over screen", () => {
-    useStore.setState({
-      guesses: Array(6).fill("hello"),
-    });
+  it("shows play again button when used up all of guess opportunities", () => {
+    useStore.getState().newGame(Array(6).fill("hello"));
+
     render(<App />);
-    expect(screen.queryByText("Game Over!")).toBeInTheDocument();
+    expect(screen.queryByText("Play Again")).toBeInTheDocument();
     expect(document.querySelectorAll("main div")).toHaveLength(6);
     expect(document.querySelectorAll("main div span")).toHaveLength(30);
     expect(document.querySelector("main")?.textContent).toEqual(
       "hellohellohellohellohellohello"
     );
   });
-  it("can start a new game", () => {
-    useStore.setState({
-      guesses: Array(6).fill("hello"),
-    });
+  it("shows 'You won!' when correct answer is guessed", () => {
+    useStore.getState().newGame(Array(2).fill("hello"));
+    const answer = useStore.getState().answer;
+    useStore.getState().addGuess(answer);
     render(<App />);
-    expect(screen.queryByText("Game Over!")).toBeInTheDocument();
+
+    expect(screen.queryByText("You won!")).toBeInTheDocument();
+  });
+  it("shows 'You lost!' when correct answer is not guessed and all guess opportunities have been used", () => {
+    useStore.getState().newGame(Array(6).fill("zzzzz"));
+    render(<App />);
+
+    expect(screen.queryByText("You lost!")).toBeInTheDocument();
+  });
+  it("can start a new game", () => {
+    useStore.getState().newGame(Array(6).fill("hello"));
+    render(<App />);
+    expect(screen.queryByText("Play Again")).toBeInTheDocument();
     expect(document.querySelector("main")?.textContent).toEqual(
       "hellohellohellohellohellohello"
     );

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { useStore } from "./store";
+import { useStore, GUESS_LENGTH } from "./store";
 import { LETTER_LENGTH } from "./word-utils";
 import WordRow from "./WordRow";
 
-const GUESS_LENGTH = 6;
 export default function App() {
   const state = useStore();
   const [guess, setGuess] = useState("");
@@ -25,7 +24,7 @@ export default function App() {
   }
 
   const numGuessesRemaining = GUESS_LENGTH - rows.length;
-  const isGameOver = state.rows.length === GUESS_LENGTH;
+  const isGameOver = state.gameState !== "playing";
 
   rows = rows.concat(Array(numGuessesRemaining).fill(""));
 
@@ -55,7 +54,8 @@ export default function App() {
           role="modal"
           className="absolute bg-white left-0 right-0 top-1/4 p-6 text-center w-3/4 mx-auto rounded border border-gray-800"
         >
-          Game Over!
+          <h2 className="text-xl">You {state.gameState}!</h2>
+          <h2>The word was {state.answer.toUpperCase()}</h2>
           <button
             className="play-again-btn block border rounded border-green-500 bg-green-500 p-2 mt-4 mx-auto shadow"
             onClick={() => {

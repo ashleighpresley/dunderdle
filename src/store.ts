@@ -1,6 +1,7 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 import { computeGuess, getRandomWord, LetterState } from "./word-utils";
+export const GUESS_LENGTH = 6;
 
 interface GuessRow {
   guess: string;
@@ -10,27 +11,39 @@ interface GuessRow {
 interface StoreState {
   answer: string;
   rows: GuessRow[];
+  gameState: "playing" | "won" | "lost";
   addGuess: (guess: string) => void;
-  newGame: () => void;
+  newGame: (initialGuess?: string[]) => void;
 }
 
 export const useStore = create<StoreState>(
   persist(
-    (set, get) => ({
-      answer: getRandomWord(),
-      rows: [],
-      addGuess: (guess: string) => {
-        set((state) => ({
-          rows: [
-            ...state.rows,
-            { guess, result: computeGuess(guess, state.answer) },
-          ],
+    (set, get) => {
+      function addGuess(guess: string) {
+        const result = computeGuess(guess, get().answer);
+        const didWin = result.every((i) => i === LetterState.Match);
+        const rows = [...get().rows, { guess, result }];
+
+        set(() => ({
+          rows,
+          gameState: didWin
+            ? "won"
+            : rows.length === GUESS_LENGTH
+            ? "lost"
+            : "playing",
         }));
-      },
-      newGame: () => {
-        set({ answer: getRandomWord(), rows: [] });
-      },
-    }),
+      }
+      return {
+        answer: getRandomWord(),
+        rows: [],
+        gameState: "playing",
+        addGuess,
+        newGame: (initialRows = []) => {
+          set({ answer: getRandomWord(), rows: [], gameState: "playing" });
+          initialRows.forEach(addGuess);
+        },
+      };
+    },
     {
       name: "wordle", // unique name
     }
