@@ -57,7 +57,7 @@ export default function App() {
         >
           Game Over!
           <button
-            className="block border rounded border-green-500 bg-green-500 p-2 mt-4 mx-auto shadow"
+            className="play-again-btn block border rounded border-green-500 bg-green-500 p-2 mt-4 mx-auto shadow"
             onClick={() => {
               state.newGame();
               setGuess("");
