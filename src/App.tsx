@@ -68,7 +68,10 @@ export default function App() {
           className="absolute bg-white left-0 right-0 top-1/4 p-6 text-center w-3/4 mx-auto rounded border border-gray-800"
         >
           <h2 className="text-xl">You {state.gameState}!</h2>
-          <h2>The word was {state.answer.toUpperCase()}</h2>
+          <h2>The word was:</h2>
+          <div>
+            <WordRow letters={state.answer} />
+          </div>
           <button
             className="play-again-btn block border rounded border-green-500 bg-green-500 p-2 mt-4 mx-auto shadow"
             onClick={() => {
