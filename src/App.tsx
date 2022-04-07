@@ -6,7 +6,7 @@ import WordRow from "./WordRow";
 
 export default function App() {
   const state = useStore();
-  const [guess, setGuess] = useGuess();
+  const [guess, setGuess, addGuessLetter] = useGuess();
   const addGuess = useStore((s) => s.addGuess);
   const previousGuess = usePrevious(guess);
   const [showInvalidGuess, setInvalidGuess] = useState(false);
@@ -63,7 +63,11 @@ export default function App() {
         ))}
       </main>
 
-      <Keyboard />
+      <Keyboard
+        onClick={(letter) => {
+          addGuessLetter(letter);
+        }}
+      />
 
       {isGameOver && (
         <div
@@ -90,11 +94,14 @@ export default function App() {
   );
 }
 
-function useGuess(): [string, React.Dispatch<React.SetStateAction<string>>] {
+function useGuess(): [
+  string,
+  React.Dispatch<React.SetStateAction<string>>,
+  (letter: string) => void
+] {
   const [guess, setGuess] = useState("");
 
-  const onKeyDown = (e: KeyboardEvent) => {
-    let letter = e.key;
+  const addGuessLetter = (letter: string) => {
     setGuess((curGuess) => {
       const newGuess = letter.length === 1 ? curGuess + letter : curGuess;
 
@@ -115,12 +122,17 @@ function useGuess(): [string, React.Dispatch<React.SetStateAction<string>>] {
     });
   };
 
+  const onKeyDown = (e: KeyboardEvent) => {
+    let letter = e.key;
+    addGuessLetter(letter);
+  };
+
   useEffect(() => {
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
   }, []);
 
-  return [guess, setGuess];
+  return [guess, setGuess, addGuessLetter];
 }
 
 function usePrevious<T>(value: T) {
