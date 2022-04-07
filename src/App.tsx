@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import Keyboard from "./Keyboard";
 import { useStore, GUESS_LENGTH } from "./store";
 import { isValidWord, LETTER_LENGTH } from "./word-utils";
 import WordRow from "./WordRow";
@@ -61,6 +62,8 @@ export default function App() {
           />
         ))}
       </main>
+
+      <Keyboard />
 
       {isGameOver && (
         <div
