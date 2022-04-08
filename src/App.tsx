@@ -40,6 +40,7 @@ export default function App() {
 
   const numGuessesRemaining = GUESS_LENGTH - rows.length;
   const isGameOver = state.gameState !== "playing";
+  const opacityLevel = `${isGameOver ? "opacity-30" : "opacity-100"}`;
 
   rows = rows.concat(Array(numGuessesRemaining).fill(""));
 
@@ -51,7 +52,7 @@ export default function App() {
           <div></div>
         </header>
 
-        <main className="grid grid-rows-6 gap-1.5 mb-4 px-8">
+        <main className={`grid grid-rows-6 gap-1.5 mb-4 px-8 ${opacityLevel}`}>
           {rows.map(({ guess, result }, index) => (
             <WordRow
               key={index}
@@ -66,11 +67,13 @@ export default function App() {
           ))}
         </main>
 
-        <Keyboard
-          onClick={(letter) => {
-            addGuessLetter(letter);
-          }}
-        />
+        <div className={opacityLevel}>
+          <Keyboard
+            onClick={(letter) => {
+              addGuessLetter(letter);
+            }}
+          />
+        </div>
 
         {isGameOver && (
           <div
@@ -83,7 +86,7 @@ export default function App() {
               <WordRow letters={state.answer} />
             </div>
             <button
-              className="play-again-btn block border rounded border-emerald-500 bg-emerald-500 p-2 mt-4 mx-auto shadow text-white"
+              className="play-again-btn block border rounded border-emerald-500 bg-emerald-500 p-2 mt-4 mx-auto shadow text-white hover:shadow-lg"
               onClick={() => {
                 state.newGame();
                 setGuess("");
