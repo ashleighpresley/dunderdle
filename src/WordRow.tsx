@@ -39,7 +39,7 @@ function CharacterBox({ value, state }: CharacterBoxProps) {
   return (
     <span
       className={`inline-block border-2 py-3
-      before:inline-block before:content-[' '] 
+      before:inline-block before:content-[' ']
       uppercase font-bold text-center text-2xl ${stateStyles}`}
     >
       {value}

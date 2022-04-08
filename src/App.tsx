@@ -58,7 +58,9 @@ export default function App() {
               letters={guess}
               result={result}
               className={
-                showInvalidGuess && curRow === index ? "animate-bounce" : ""
+                showInvalidGuess && curRow === index
+                  ? "animate-bounce bg-white/75"
+                  : ""
               }
             />
           ))}
@@ -109,7 +111,7 @@ function useGuess(): [
       console.log(letter);
       switch (letter) {
         case "Backspace":
-        case "Back":
+        case "<-":
           return newGuess.slice(0, -1);
         case "Enter":
           if (newGuess.length === LETTER_LENGTH) {
