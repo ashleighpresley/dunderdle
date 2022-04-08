@@ -44,52 +44,54 @@ export default function App() {
   rows = rows.concat(Array(numGuessesRemaining).fill(""));
 
   return (
-    <div className="mx-auto w-96 relative">
-      <header className="border-b border-gray-500 pb-2 my-2">
-        <h1 className="text-4xl text-center">Wordle</h1>
-        <div></div>
-      </header>
+    <div>
+      <div className="mx-auto w-96 relative">
+        <header className="border-b border-gray-300 pb-2 my-2">
+          <h1 className="text-4xl text-center tracking-tight">Wordle</h1>
+          <div></div>
+        </header>
 
-      <main className="grid grid-rows-6 gap-3 mb-4">
-        {rows.map(({ guess, result }, index) => (
-          <WordRow
-            key={index}
-            letters={guess}
-            result={result}
-            className={
-              showInvalidGuess && curRow === index ? "animate-bounce" : ""
-            }
-          />
-        ))}
-      </main>
+        <main className="grid grid-rows-6 gap-1.5 mb-4 px-8">
+          {rows.map(({ guess, result }, index) => (
+            <WordRow
+              key={index}
+              letters={guess}
+              result={result}
+              className={
+                showInvalidGuess && curRow === index ? "animate-bounce" : ""
+              }
+            />
+          ))}
+        </main>
 
-      <Keyboard
-        onClick={(letter) => {
-          addGuessLetter(letter);
-        }}
-      />
+        <Keyboard
+          onClick={(letter) => {
+            addGuessLetter(letter);
+          }}
+        />
 
-      {isGameOver && (
-        <div
-          role="modal"
-          className="absolute bg-white left-0 right-0 top-1/4 p-6 text-center w-3/4 mx-auto rounded border border-gray-800"
-        >
-          <h2 className="text-xl">You {state.gameState}!</h2>
-          <h2>The word was:</h2>
-          <div>
-            <WordRow letters={state.answer} />
-          </div>
-          <button
-            className="play-again-btn block border rounded border-green-500 bg-green-500 p-2 mt-4 mx-auto shadow text-white"
-            onClick={() => {
-              state.newGame();
-              setGuess("");
-            }}
+        {isGameOver && (
+          <div
+            role="modal"
+            className="absolute bg-white left-0 right-0 top-1/4 p-6 text-center w-3/4 mx-auto rounded shadow-lg"
           >
-            New Game
-          </button>
-        </div>
-      )}
+            <h2 className="text-xl">You {state.gameState}!</h2>
+            <h2>The word was:</h2>
+            <div>
+              <WordRow letters={state.answer} />
+            </div>
+            <button
+              className="play-again-btn block border rounded border-emerald-500 bg-emerald-500 p-2 mt-4 mx-auto shadow text-white"
+              onClick={() => {
+                state.newGame();
+                setGuess("");
+              }}
+            >
+              New Game
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -104,8 +106,9 @@ function useGuess(): [
   const addGuessLetter = (letter: string) => {
     setGuess((curGuess) => {
       const newGuess = letter.length === 1 ? curGuess + letter : curGuess;
-
+      console.log(letter);
       switch (letter) {
+        case "Backspace":
         case "Back":
           return newGuess.slice(0, -1);
         case "Enter":

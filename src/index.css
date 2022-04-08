@@ -4,7 +4,11 @@
 
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Lato", sans-serif;
+}
+
+h1 {
+  font-family: "Alfa Slab One", cursive;
 }
 
 code {

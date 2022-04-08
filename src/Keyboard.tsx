@@ -17,24 +17,24 @@ export default function Keyboard({
     <div className="flex flex-col">
       {keyboardKeys.map((keyboardRow, rowIndex) => {
         return (
-          <div key={rowIndex} className="flex justify-center my-2 space-x-1">
+          <div
+            key={rowIndex}
+            className="flex justify-center my-1 space-x-1.5 px-1"
+          >
             {keyboardRow.map((key, index) => {
-              let styles = "rounded font-bold uppercase py-2 flex-1";
+              let styles = "rounded font-bold uppercase py-4 px-2 flex-1";
               const letterState = keyStateStyles[keyboardLetterState[key]];
 
               if (key === "") {
                 styles += " pointer-events-none";
               }
 
-              if (
-                letterState === "bg-yellow-500" ||
-                letterState === "bg-green-500"
-              ) {
+              if (letterState) {
                 styles += " text-white " + letterState;
-              } else if (letterState === "bg-gray-500") {
-                styles += " text-black " + letterState;
               } else if (key !== "") {
-                styles += " bg-gray-400";
+                styles += " bg-gray-300";
+              } else if (key === "") {
+                styles += " px-0";
               }
 
               return (
@@ -53,12 +53,11 @@ export default function Keyboard({
 const keyboardKeys = [
   ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
   ["", "a", "s", "d", "f", "g", "h", "j", "k", "l", ""],
-  ["", "z", "x", "c", "v", "b", "n", "m", ""],
-  ["Back", "Enter"],
+  ["Enter", "z", "x", "c", "v", "b", "n", "m", "Back"],
 ];
 
 const keyStateStyles = {
-  [LetterState.Miss]: "bg-gray-500",
-  [LetterState.Present]: "bg-yellow-500",
-  [LetterState.Match]: "bg-green-500",
+  [LetterState.Miss]: "bg-zinc-400",
+  [LetterState.Present]: "bg-yellow-400",
+  [LetterState.Match]: "bg-emerald-500",
 };
