@@ -5,6 +5,8 @@ import { isValidWord, LETTER_LENGTH } from "./word-utils";
 import WordRow from "./WordRow";
 import { Info, ChartLine, Share, Gear } from "phosphor-react";
 import { StatsChart } from "./StatsChart";
+import { StatsScreen } from "./StatsScreen";
+import { InfoScreen } from "./InfoScreen";
 
 export default function App() {
   const state = useStore();
@@ -13,6 +15,7 @@ export default function App() {
   const previousGuess = usePrevious(guess);
   const [showInvalidGuess, setInvalidGuess] = useState(false);
   const [showStatsModal, setShowStatsModal] = React.useState(false);
+  const [showInfoModal, setShowInfoModal] = React.useState(false);
 
   useEffect(() => {
     let id: any;
@@ -54,7 +57,7 @@ export default function App() {
           <Info
             size={22}
             onClick={() => {
-              console.log("info");
+              setShowInfoModal(true);
             }}
             className="cursor-pointer"
           />
@@ -62,7 +65,6 @@ export default function App() {
             size={22}
             onClick={() => {
               setShowStatsModal(true);
-              console.log("stats");
             }}
             className="cursor-pointer"
           />
@@ -125,26 +127,35 @@ export default function App() {
                   </div>
                   {/*body*/}
                   <div className="relative p-6 flex-auto">
-                    <div className="my-4 text-slate-500 leading-relaxed grid grid-cols-4 gap-10 text-center">
-                      <div>
-                        <p className="text-5xl">{state.losses + state.wins}</p>
-                        <p>Played</p>
-                      </div>
-                      <div>
-                        <p className="text-5xl">{state.winRate}</p>
-                        <p>Win %</p>
-                      </div>
-                      <div>
-                        <p className="text-5xl">{state.curStreak}</p>
-                        <p>Current Streak</p>
-                      </div>
-                      <div>
-                        <p className="text-5xl">{state.bestStreak}</p>
-                        <p>Best Streak</p>
-                      </div>
-                    </div>
-                    <div>{<StatsChart />}</div>
+                    {<StatsScreen />}
+                    {<StatsChart />}
                   </div>
+                </div>
+              </div>
+            </div>
+            <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+          </>
+        ) : null}
+
+        {showInfoModal ? (
+          <>
+            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+              <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                {/*content*/}
+                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                  {/*header*/}
+                  <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                    <h3 className="text-3xl font-semibold">How to Play</h3>
+                    <button
+                      className="text-red-500 font-bold uppercase text-sm px-6 py-3 rounded hover:text-red-700 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                      onClick={() => setShowInfoModal(false)}
+                    >
+                      Close
+                    </button>
+                  </div>
+                  {/*body*/}
+                  <div className="relative p-6 flex-auto">{<InfoScreen />}</div>
                 </div>
               </div>
             </div>

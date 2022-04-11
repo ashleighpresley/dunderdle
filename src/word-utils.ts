@@ -16,6 +16,7 @@ export enum LetterState {
   Miss,
   Present,
   Match,
+  Unfilled,
 }
 
 export function computeGuess(
