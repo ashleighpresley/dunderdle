@@ -60,4 +60,5 @@ const keyStateStyles = {
   [LetterState.Miss]: "bg-zinc-400",
   [LetterState.Present]: "bg-yellow-400",
   [LetterState.Match]: "bg-emerald-500",
+  [LetterState.Unfilled]: "bg-white",
 };
