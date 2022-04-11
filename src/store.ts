@@ -2,6 +2,12 @@ import create from "zustand";
 import { persist } from "zustand/middleware";
 import { computeGuess, getRandomWord, LetterState } from "./word-utils";
 export const GUESS_LENGTH = 6;
+let wins = 0;
+let losses = 0;
+let winRate = 0;
+let curStreak = 0;
+let bestStreak = 0;
+let winDistribution = [0, 0, 0, 0, 0, 0];
 
 interface GuessRow {
   guess: string;
@@ -15,6 +21,12 @@ interface StoreState {
   keyboardLetterState: { [letter: string]: LetterState };
   addGuess: (guess: string) => void;
   newGame: (initialGuess?: string[]) => void;
+  wins: number;
+  losses: number;
+  winRate: number;
+  curStreak: number;
+  bestStreak: number;
+  winDistribution: number[];
 }
 
 export const useStore = create<StoreState>(
@@ -24,6 +36,14 @@ export const useStore = create<StoreState>(
         const result = computeGuess(guess, get().answer);
         const didWin = result.every((i) => i === LetterState.Match);
         const rows = [...get().rows, { guess, result }];
+        didWin
+          ? ((wins += 1),
+            (curStreak += 1),
+            curStreak >= bestStreak ? (bestStreak = curStreak) : bestStreak,
+            (winDistribution[rows.length - 1] += 1))
+          : rows.length === GUESS_LENGTH
+          ? ((losses += 1), (curStreak = 0))
+          : null;
 
         const keyboardLetterState = get().keyboardLetterState;
         result.forEach((r, index) => {
@@ -51,6 +71,12 @@ export const useStore = create<StoreState>(
             : rows.length === GUESS_LENGTH
             ? "lost"
             : "playing",
+          wins,
+          losses,
+          winRate: Math.round((wins / (wins + losses)) * 100),
+          curStreak,
+          bestStreak,
+          winDistribution,
         }));
       }
       return {
@@ -68,6 +94,12 @@ export const useStore = create<StoreState>(
           });
           initialRows.forEach(addGuess);
         },
+        wins,
+        losses,
+        winRate,
+        curStreak,
+        bestStreak,
+        winDistribution,
       };
     },
     {

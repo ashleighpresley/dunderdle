@@ -1,7 +1,12 @@
 import wordBank from "./word-bank.json";
+// import officeWordBank from "./office-word-bank.json";
 
 export const LETTER_LENGTH = 5;
 
+// export function getRandomWord() {
+//   const randomIndex = Math.floor(Math.random() * officeWordBank.length);
+//   return officeWordBank[randomIndex];
+// }
 export function getRandomWord() {
   const randomIndex = Math.floor(Math.random() * wordBank.length);
   return wordBank[randomIndex];
@@ -48,5 +53,5 @@ export function computeGuess(
 }
 
 export function isValidWord(word: string): boolean {
-  return wordBank.includes(word);
+  return wordBank.includes(word) /*|| officeWordBank.includes(word)*/;
 }

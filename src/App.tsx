@@ -3,6 +3,8 @@ import Keyboard from "./Keyboard";
 import { useStore, GUESS_LENGTH } from "./store";
 import { isValidWord, LETTER_LENGTH } from "./word-utils";
 import WordRow from "./WordRow";
+import { Info, ChartLine, Share, Gear } from "phosphor-react";
+import { StatsChart } from "./StatsChart";
 
 export default function App() {
   const state = useStore();
@@ -10,6 +12,7 @@ export default function App() {
   const addGuess = useStore((s) => s.addGuess);
   const previousGuess = usePrevious(guess);
   const [showInvalidGuess, setInvalidGuess] = useState(false);
+  const [showStatsModal, setShowStatsModal] = React.useState(false);
 
   useEffect(() => {
     let id: any;
@@ -47,9 +50,37 @@ export default function App() {
   return (
     <div>
       <div className="mx-auto w-96 relative">
-        <header className="border-b border-gray-300 pb-2 my-2">
+        <header className="border-b border-gray-300 pb-2 my-2 flex flex-col-5 gap-8 justify-center items-center">
+          <Info
+            size={22}
+            onClick={() => {
+              console.log("info");
+            }}
+            className="cursor-pointer"
+          />
+          <ChartLine
+            size={22}
+            onClick={() => {
+              setShowStatsModal(true);
+              console.log("stats");
+            }}
+            className="cursor-pointer"
+          />
           <h1 className="text-4xl text-center tracking-tight">Wordle</h1>
-          <div></div>
+          <Share
+            size={22}
+            onClick={() => {
+              console.log("share");
+            }}
+            className="cursor-pointer"
+          />
+          <Gear
+            size={22}
+            onClick={() => {
+              console.log("settings");
+            }}
+            className="cursor-pointer"
+          />
         </header>
 
         <main className={`grid grid-rows-6 gap-1.5 mb-4 px-8 ${opacityLevel}`}>
@@ -74,6 +105,52 @@ export default function App() {
             }}
           />
         </div>
+
+        {showStatsModal ? (
+          <>
+            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+              <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                {/*content*/}
+                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                  {/*header*/}
+                  <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                    <h3 className="text-3xl font-semibold">Stats</h3>
+                    <button
+                      className="text-red-500 font-bold uppercase text-sm px-6 py-3 rounded hover:text-red-700 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                      onClick={() => setShowStatsModal(false)}
+                    >
+                      Close
+                    </button>
+                  </div>
+                  {/*body*/}
+                  <div className="relative p-6 flex-auto">
+                    <div className="my-4 text-slate-500 leading-relaxed grid grid-cols-4 gap-10 text-center">
+                      <div>
+                        <p className="text-5xl">{state.losses + state.wins}</p>
+                        <p>Played</p>
+                      </div>
+                      <div>
+                        <p className="text-5xl">{state.winRate}</p>
+                        <p>Win %</p>
+                      </div>
+                      <div>
+                        <p className="text-5xl">{state.curStreak}</p>
+                        <p>Current Streak</p>
+                      </div>
+                      <div>
+                        <p className="text-5xl">{state.bestStreak}</p>
+                        <p>Best Streak</p>
+                      </div>
+                    </div>
+                    <div>{<StatsChart />}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+          </>
+        ) : null}
 
         {isGameOver && (
           <div
@@ -111,7 +188,6 @@ function useGuess(): [
   const addGuessLetter = (letter: string) => {
     setGuess((curGuess) => {
       const newGuess = letter.length === 1 ? curGuess + letter : curGuess;
-      console.log(letter);
       switch (letter) {
         case "Backspace":
         case "<-":
