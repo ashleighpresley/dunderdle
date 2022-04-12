@@ -33,7 +33,7 @@ interface CharacterBoxProps {
 function CharacterBox({ value, state }: CharacterBoxProps) {
   const stateStyles =
     state == null
-      ? "border-gray-300 text-black"
+      ? `border-gray-300`
       : `${characterStateStyles[state]} text-white`;
 
   return (
@@ -51,5 +51,5 @@ const characterStateStyles = {
   [LetterState.Miss]: "bg-zinc-400 border-zinc-400",
   [LetterState.Present]: "bg-yellow-400 border-yellow-400",
   [LetterState.Match]: "bg-emerald-500 border-emerald-500",
-  [LetterState.Unfilled]: "bg-white border-gray-300 text-black",
+  [LetterState.Unfilled]: "border-gray-300 text-black",
 };

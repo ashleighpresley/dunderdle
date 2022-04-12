@@ -3,7 +3,7 @@ import Keyboard from "./Keyboard";
 import { useStore, GUESS_LENGTH } from "./store";
 import { isValidWord, LETTER_LENGTH } from "./word-utils";
 import WordRow from "./WordRow";
-import { Info, ChartLine, Share, Gear } from "phosphor-react";
+import { Info, ChartLine, Share, Moon, Sun } from "phosphor-react";
 import { StatsChart } from "./StatsChart";
 import { StatsScreen } from "./StatsScreen";
 import { InfoScreen } from "./InfoScreen";
@@ -18,6 +18,7 @@ export default function App() {
   const [showStatsModal, setShowStatsModal] = React.useState(false);
   const [showInfoModal, setShowInfoModal] = React.useState(false);
   const [showShareModal, setShowShareModal] = React.useState(false);
+  const [showGameOverModal, setShowGameOverModal] = React.useState(false);
   const [hours, setHours] = useState(10);
   const [minutes, setMinutes] = useState(10);
   const [seconds, setSeconds] = useState(10);
@@ -85,9 +86,28 @@ export default function App() {
 
   const numGuessesRemaining = GUESS_LENGTH - rows.length;
   const isGameOver = state.gameState !== "playing";
-  const opacityLevel = `${isGameOver ? "opacity-30" : "opacity-100"}`;
+  isGameOver ? () => setShowGameOverModal(true) : null;
 
   rows = rows.concat(Array(numGuessesRemaining).fill(""));
+
+  const darkTheme = ["bg-slate-600", "text-white"];
+  const lightTheme = ["bg-white", "text-black"];
+
+  state.theme === "dark"
+    ? (document.body.classList.add(darkTheme[0]),
+      document
+        .querySelectorAll(".icon")
+        .forEach((el) => el.classList.add(darkTheme[1])),
+      document
+        .querySelectorAll("h1")
+        .forEach((el) => el.classList.add(darkTheme[1])))
+    : (document.body.classList.remove(darkTheme[0]),
+      document
+        .querySelectorAll(".icon")
+        .forEach((el) => el.classList.remove(darkTheme[1])),
+      document
+        .querySelectorAll("h1")
+        .forEach((el) => el.classList.remove(darkTheme[1])));
 
   return (
     <div>
@@ -98,14 +118,14 @@ export default function App() {
             onClick={() => {
               setShowInfoModal(true);
             }}
-            className="cursor-pointer"
+            className="cursor-pointer icon"
           />
           <ChartLine
             size={22}
             onClick={() => {
               setShowStatsModal(true);
             }}
-            className="cursor-pointer"
+            className="cursor-pointer icon"
           />
           <h1 className="text-4xl text-center tracking-tight">Wordle</h1>
           <Share
@@ -113,18 +133,28 @@ export default function App() {
             onClick={() => {
               setShowShareModal(true);
             }}
-            className="cursor-pointer"
+            className="cursor-pointer icon"
           />
-          <Gear
-            size={22}
-            onClick={() => {
-              console.log("settings");
-            }}
-            className="cursor-pointer"
-          />
+          {state.theme === "light" ? (
+            <Moon
+              size={22}
+              onClick={() => (state.theme = "dark")}
+              className="cursor-pointer icon"
+            />
+          ) : (
+            <Sun
+              size={22}
+              onClick={() => (state.theme = "light")}
+              className="cursor-pointer icon"
+            />
+          )}
         </header>
 
-        <main className={`grid grid-rows-6 gap-1.5 mb-4 px-8 ${opacityLevel}`}>
+        <main
+          className={`grid grid-rows-6 gap-1.5 mb-4 px-8 ${
+            state.theme === "dark" ? darkTheme[1] : lightTheme[1]
+          }`}
+        >
           {rows.map(({ guess, result }, index) => (
             <WordRow
               key={index}
@@ -139,7 +169,7 @@ export default function App() {
           ))}
         </main>
 
-        <div className={opacityLevel}>
+        <div>
           <Keyboard
             onClick={(letter) => {
               addGuessLetter(letter);
@@ -149,10 +179,18 @@ export default function App() {
 
         {showStatsModal ? (
           <>
-            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <div
+              className={`justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ${
+                state.theme === "dark" ? darkTheme[1] : lightTheme[1]
+              }`}
+            >
               <div className="relative w-auto my-6 mx-auto max-w-3xl">
                 {/*content*/}
-                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <div
+                  className={`border-0 rounded-lg shadow-lg relative flex flex-col w-full outline-none focus:outline-none ${
+                    state.theme === "dark" ? darkTheme[0] : lightTheme[0]
+                  }`}
+                >
                   {/*header*/}
                   <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                     <h3 className="text-3xl font-semibold">Stats</h3>
@@ -169,9 +207,6 @@ export default function App() {
                     {<StatsScreen />}
                     {<StatsChart />}
                   </div>
-                  <p>
-                    {hours}:{minutes}:{seconds}
-                  </p>
                 </div>
               </div>
             </div>
@@ -181,10 +216,18 @@ export default function App() {
 
         {showInfoModal ? (
           <>
-            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <div
+              className={`justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ${
+                state.theme === "dark" ? darkTheme[1] : lightTheme[1]
+              }`}
+            >
               <div className="relative w-auto my-6 mx-auto max-w-3xl">
                 {/*content*/}
-                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <div
+                  className={`border-0 rounded-lg shadow-lg relative flex flex-col w-full outline-none focus:outline-none ${
+                    state.theme === "dark" ? darkTheme[0] : lightTheme[0]
+                  }`}
+                >
                   {/*header*/}
                   <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                     <h3 className="text-3xl font-semibold">How to Play</h3>
@@ -207,10 +250,18 @@ export default function App() {
 
         {showShareModal ? (
           <>
-            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+            <div
+              className={`justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ${
+                state.theme === "dark" ? darkTheme[1] : lightTheme[1]
+              }`}
+            >
               <div className="relative w-auto my-6 mx-auto max-w-3xl">
                 {/*content*/}
-                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <div
+                  className={`border-0 rounded-lg shadow-lg relative flex flex-col w-full outline-none focus:outline-none ${
+                    state.theme === "dark" ? darkTheme[0] : lightTheme[0]
+                  }`}
+                >
                   {/*header*/}
                   <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                     <h3 className="text-3xl font-semibold">Share</h3>
@@ -233,31 +284,68 @@ export default function App() {
           </>
         ) : null}
 
-        {isGameOver && (
+        {isGameOver && !showGameOverModal ? (
           <div
             role="modal"
-            className="absolute bg-white left-0 right-0 top-1/4 p-6 text-center w-3/4 mx-auto rounded shadow-lg"
+            className={` ${
+              state.theme === "dark"
+                ? darkTheme[0] + " " + darkTheme[1]
+                : lightTheme[0] + " " + lightTheme[1]
+            } absolute inset-x-0 bottom-0 p-10 text-center mx-auto rounded shadow-lg opacity-90`}
           >
-            <h2 className="text-xl">You {state.gameState}!</h2>
-            <h2>The word was:</h2>
-            <div>
+            <div className="">
               <WordRow letters={state.answer} />
             </div>
-            {/* <button
-              className="play-again-btn block border rounded border-emerald-500 bg-emerald-500 p-2 mt-4 mx-auto shadow text-white hover:shadow-lg"
-              onClick={() => {
-                state.newGame();
-                setGuess("");
-              }}
-            >
-              New Game
-            </button> */}
             <h1 className="pt-4">Next word:</h1>
             <p>
               {hours}:{minutes}:{seconds}
             </p>
           </div>
-        )}
+        ) : null}
+
+        {isGameOver && showGameOverModal ? (
+          <>
+            <div
+              className={`justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ${
+                state.theme === "dark" ? darkTheme[1] : lightTheme[1]
+              }`}
+            >
+              <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                {/*content*/}
+                <div
+                  className={`border-0 rounded-lg shadow-lg relative flex flex-col w-full outline-none focus:outline-none ${
+                    state.theme === "dark" ? darkTheme[0] : lightTheme[0]
+                  }`}
+                >
+                  {/*header*/}
+                  <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                    <h3 className="text-3xl font-semibold">Game Over</h3>
+                    <button
+                      className="text-red-500 font-bold uppercase text-sm px-6 py-3 rounded hover:text-red-700 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                      onClick={() => setShowGameOverModal(false)}
+                    >
+                      Close
+                    </button>
+                  </div>
+                  {/*body*/}
+                  <div className="relative p-6 flex-auto text-center">
+                    <h2 className="text-xl">You {state.gameState}!</h2>
+                    <h2>The word was:</h2>
+                    <div>
+                      <WordRow letters={state.answer} />
+                    </div>
+                    <h1 className="pt-4">Next word:</h1>
+                    <p>
+                      {hours}:{minutes}:{seconds}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+          </>
+        ) : null}
       </div>
     </div>
   );

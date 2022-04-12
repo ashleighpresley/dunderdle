@@ -8,6 +8,7 @@ let winRate = 0;
 let curStreak = 0;
 let bestStreak = 0;
 let winDistribution = [0, 0, 0, 0, 0, 0];
+let theme = "light";
 
 interface GuessRow {
   guess: string;
@@ -27,6 +28,7 @@ interface StoreState {
   curStreak: number;
   bestStreak: number;
   winDistribution: number[];
+  theme: string;
 }
 
 export const useStore = create<StoreState>(
@@ -101,6 +103,7 @@ export const useStore = create<StoreState>(
         bestStreak,
         winDistribution,
         squares: [],
+        theme,
       };
     },
     {
