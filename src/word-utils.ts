@@ -1,5 +1,6 @@
 import wordBank from "./word-bank.json";
-// import officeWordBank from "./office-word-bank.json";
+
+import officeWordBank from "./office-word-bank.json";
 
 export const LETTER_LENGTH = 5;
 
@@ -37,6 +38,7 @@ export function computeGuess(
   guessArray.forEach((letter, index) => {
     if (letter === answerArray[index]) {
       guessedLetters.push(letter);
+
       result.push(LetterState.Match);
     } else if (
       answerArray.includes(letter) &&
@@ -54,5 +56,6 @@ export function computeGuess(
 }
 
 export function isValidWord(word: string): boolean {
-  return wordBank.includes(word) /*|| officeWordBank.includes(word)*/;
+  return wordBank.includes(word);
+  //return wordBank.includes(word) || officeWordBank.includes(word);
 }

@@ -8,6 +8,7 @@ let winRate = 0;
 let curStreak = 0;
 let bestStreak = 0;
 let winDistribution = [0, 0, 0, 0, 0, 0];
+let squares = Array();
 
 interface GuessRow {
   guess: string;
@@ -27,6 +28,7 @@ interface StoreState {
   curStreak: number;
   bestStreak: number;
   winDistribution: number[];
+  squares: string[];
 }
 
 export const useStore = create<StoreState>(
@@ -34,8 +36,23 @@ export const useStore = create<StoreState>(
     (set, get) => {
       function addGuess(guess: string) {
         const result = computeGuess(guess, get().answer);
+        console.log(result);
         const didWin = result.every((i) => i === LetterState.Match);
         const rows = [...get().rows, { guess, result }];
+        squares.push([...result]);
+
+        for (var i = 0; i < squares.length; i++) {
+          for (var j = 0; j < squares[i].length; j++) {
+            if (squares[i][j].toString() === "0") {
+              squares[i][j] = "⬛";
+            } else if (squares[i][j].toString() === "1") {
+              squares[i][j] = "🟨";
+            } else if (squares[i][j].toString() === "2") {
+              squares[i][j] = "🟩";
+            }
+          }
+        }
+
         didWin
           ? ((wins += 1),
             (curStreak += 1),
@@ -49,7 +66,6 @@ export const useStore = create<StoreState>(
         result.forEach((r, index) => {
           const resultGuessLetter = guess[index];
           const currentLetterState = keyboardLetterState[resultGuessLetter];
-
           switch (currentLetterState) {
             case LetterState.Match:
               break;
@@ -77,6 +93,7 @@ export const useStore = create<StoreState>(
           curStreak,
           bestStreak,
           winDistribution,
+          squares,
         }));
       }
       return {
@@ -91,6 +108,7 @@ export const useStore = create<StoreState>(
             rows: [],
             gameState: "playing",
             keyboardLetterState: {},
+            squares: [],
           });
           initialRows.forEach(addGuess);
         },
@@ -100,6 +118,7 @@ export const useStore = create<StoreState>(
         curStreak,
         bestStreak,
         winDistribution,
+        squares,
       };
     },
     {

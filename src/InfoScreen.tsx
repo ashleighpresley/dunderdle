@@ -1,5 +1,4 @@
 import WordRow from "./WordRow";
-import { LetterState } from "./word-utils";
 
 export const InfoScreen = () => {
   return (
