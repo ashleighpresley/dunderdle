@@ -6,9 +6,22 @@ export const ShareScreen = () => {
     <div className="text-center">
       <div id="wordle-share">
         <p>Wordle #1</p>
-        {state.squares.map((item, i) => (
-          <div key={item + i}> {item} </div>
-        ))}
+        {state.rows.map((row, i) => {
+          return (
+            <div key={i}>
+              {row.result?.map((number) => {
+                switch (number) {
+                  case 1:
+                    return "🟨";
+                  case 0:
+                    return "⬛";
+                  case 2:
+                    return "🟩";
+                }
+              })}
+            </div>
+          );
+        })}
       </div>
       <p
         onClick={() =>

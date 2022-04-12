@@ -18,6 +18,43 @@ export default function App() {
   const [showStatsModal, setShowStatsModal] = React.useState(false);
   const [showInfoModal, setShowInfoModal] = React.useState(false);
   const [showShareModal, setShowShareModal] = React.useState(false);
+  const [hours, setHours] = useState(10);
+  const [minutes, setMinutes] = useState(10);
+  const [seconds, setSeconds] = useState(10);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const nextWordleCountdown = () => {
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      tomorrow.setHours(0, 0, 0, 0);
+      const today = new Date().getTime();
+
+      const timeDiff = tomorrow.getTime() - today;
+
+      const seconds = 1000;
+      const minutes = seconds * 60;
+      const hours = minutes * 60;
+      const days = hours * 24;
+
+      let timeHours = Math.floor((timeDiff % days) / hours);
+      let timeMinutes = Math.floor((timeDiff % hours) / minutes);
+      let timeSeconds = Math.floor((timeDiff % minutes) / seconds);
+
+      timeHours = timeHours < 10 ? 0 + timeHours : timeHours;
+      timeMinutes = timeMinutes < 10 ? 0 + timeMinutes : timeMinutes;
+      timeSeconds = timeSeconds < 10 ? 0 + timeSeconds : timeSeconds;
+
+      setHours(timeHours);
+      setMinutes(timeMinutes);
+      setSeconds(timeSeconds);
+      setIsLoading(false);
+      timeHours == 0o0 && timeMinutes == 0o0 && timeSeconds == 0o0
+        ? [state.newGame(), setGuess("")]
+        : null;
+    };
+    setInterval(nextWordleCountdown, 1000);
+  }, []);
 
   useEffect(() => {
     let id: any;
@@ -132,6 +169,9 @@ export default function App() {
                     {<StatsScreen />}
                     {<StatsChart />}
                   </div>
+                  <p>
+                    {hours}:{minutes}:{seconds}
+                  </p>
                 </div>
               </div>
             </div>
@@ -203,7 +243,7 @@ export default function App() {
             <div>
               <WordRow letters={state.answer} />
             </div>
-            <button
+            {/* <button
               className="play-again-btn block border rounded border-emerald-500 bg-emerald-500 p-2 mt-4 mx-auto shadow text-white hover:shadow-lg"
               onClick={() => {
                 state.newGame();
@@ -211,7 +251,11 @@ export default function App() {
               }}
             >
               New Game
-            </button>
+            </button> */}
+            <h1 className="pt-4">Next word:</h1>
+            <p>
+              {hours}:{minutes}:{seconds}
+            </p>
           </div>
         )}
       </div>
