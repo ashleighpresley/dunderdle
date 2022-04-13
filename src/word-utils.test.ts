@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   computeGuess,
-  getRandomWord,
+  getOfficeWord,
   isValidWord,
   LetterState,
 } from "./word-utils";
@@ -14,10 +14,10 @@ describe("isValidWord", () => {
     expect(isValidWord("zzzzz")).toBeFalsy();
   });
 });
-describe("getRandomWord", () => {
-  it("gets a random word", () => {
-    expect(getRandomWord()).toBeTruthy();
-    expect(getRandomWord()).toHaveLength(5);
+describe("getOfficeWord", () => {
+  it("gets an office themed word", () => {
+    expect(getOfficeWord()).toBeTruthy();
+    expect(getOfficeWord()).toHaveLength(5);
   });
 });
 
