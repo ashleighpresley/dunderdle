@@ -24,6 +24,30 @@ export default function App() {
   const [seconds, setSeconds] = useState(10);
   const [isLoading, setIsLoading] = useState(true);
 
+  (function resetAtMidnight() {
+    const state = useStore();
+    const now = new Date();
+
+    let milsTilMidnight =
+      new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate(),
+        10,
+        49,
+        50,
+        0
+      ).getTime() - now.getTime();
+    if (milsTilMidnight < 0) {
+      milsTilMidnight += 86400000; // it's after midnight, try midnight tomorrow.
+    }
+    setTimeout(function () {
+      state.newGame();
+      setGuess("");
+      () => resetAtMidnight();
+    }, milsTilMidnight);
+  })();
+
   useEffect(() => {
     const nextWordleCountdown = () => {
       const tomorrow = new Date();
@@ -50,9 +74,6 @@ export default function App() {
       setMinutes(timeMinutes);
       setSeconds(timeSeconds);
       setIsLoading(false);
-      timeHours == 0o0 && timeMinutes == 0o0 && timeSeconds == 0o0
-        ? [state.newGame(), setGuess("")]
-        : null;
     };
     setInterval(nextWordleCountdown, 1000);
   }, []);
