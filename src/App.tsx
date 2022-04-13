@@ -8,6 +8,7 @@ import { StatsChart } from "./StatsChart";
 import { StatsScreen } from "./StatsScreen";
 import { InfoScreen } from "./InfoScreen";
 import { ShareScreen } from "./ShareScreen";
+import theOfficeWordBank from "./the-office-word-bank.json";
 
 export default function App() {
   const state = useStore();
@@ -24,29 +25,14 @@ export default function App() {
   const [seconds, setSeconds] = useState(10);
   const [isLoading, setIsLoading] = useState(true);
 
-  (function resetAtMidnight() {
-    const state = useStore();
-    const now = new Date();
+  const today = new Date().toLocaleDateString("en-US") as string;
+  let word =
+    theOfficeWordBank[today as keyof typeof theOfficeWordBank][0]["word"];
 
-    let milsTilMidnight =
-      new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        now.getDate(),
-        11,
-        30,
-        10,
-        0
-      ).getTime() - now.getTime();
-    if (milsTilMidnight < 0) {
-      milsTilMidnight += 86400000; // it's after midnight, try midnight tomorrow.
-    }
-    setTimeout(function () {
-      state.newGame();
-      setGuess("");
-      () => resetAtMidnight();
-    }, milsTilMidnight);
-  })();
+  if (state.answer != word) {
+    state.newGame();
+    setGuess("");
+  }
 
   useEffect(() => {
     const nextWordleCountdown = () => {
