@@ -27,25 +27,57 @@ export const StatsChart = () => {
           ],
         }}
         height={300}
-        options={{
-          indexAxis: "y",
-          maintainAspectRatio: false,
-          scales: {
-            x: {
-              grid: {
-                display: false,
-              },
-              ticks: {
-                stepSize: 1,
-              },
-            },
-            y: {
-              grid: {
-                display: false,
-              },
-            },
-          },
-        }}
+        options={
+          state.theme === "dark"
+            ? {
+                indexAxis: "y",
+                maintainAspectRatio: false,
+                color: "white",
+                scales: {
+                  x: {
+                    grid: {
+                      display: false,
+                    },
+                    ticks: {
+                      stepSize: 1,
+                      color: "white",
+                    },
+                  },
+                  y: {
+                    grid: {
+                      display: false,
+                    },
+                    ticks: {
+                      color: "white",
+                    },
+                  },
+                },
+              }
+            : {
+                indexAxis: "y",
+                maintainAspectRatio: false,
+                color: "black",
+                scales: {
+                  x: {
+                    grid: {
+                      display: false,
+                    },
+                    ticks: {
+                      stepSize: 1,
+                      color: "black",
+                    },
+                  },
+                  y: {
+                    grid: {
+                      display: false,
+                    },
+                    ticks: {
+                      color: "black",
+                    },
+                  },
+                },
+              }
+        }
       />
     </div>
   );

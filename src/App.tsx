@@ -3,7 +3,7 @@ import Keyboard from "./Keyboard";
 import { useStore, GUESS_LENGTH } from "./store";
 import { isValidWord, LETTER_LENGTH } from "./word-utils";
 import WordRow from "./WordRow";
-import { Info, ChartLine, Share, Moon, Sun } from "phosphor-react";
+import { Info, ChartLine, Share, Moon, Sun, XCircle } from "phosphor-react";
 import { StatsChart } from "./StatsChart";
 import { StatsScreen } from "./StatsScreen";
 import { InfoScreen } from "./InfoScreen";
@@ -199,7 +199,7 @@ export default function App() {
                       type="button"
                       onClick={() => setShowStatsModal(false)}
                     >
-                      Close
+                      <XCircle size={22} className={"icon"} />
                     </button>
                   </div>
                   {/*body*/}
@@ -236,7 +236,7 @@ export default function App() {
                       type="button"
                       onClick={() => setShowInfoModal(false)}
                     >
-                      Close
+                      <XCircle size={22} className={"icon"} />
                     </button>
                   </div>
                   {/*body*/}
@@ -270,7 +270,7 @@ export default function App() {
                       type="button"
                       onClick={() => setShowShareModal(false)}
                     >
-                      Close
+                      <XCircle size={22} className={"icon"} />
                     </button>
                   </div>
                   {/*body*/}
@@ -325,7 +325,7 @@ export default function App() {
                       type="button"
                       onClick={() => setShowGameOverModal(false)}
                     >
-                      Close
+                      <XCircle size={22} className={"icon"} />
                     </button>
                   </div>
                   {/*body*/}
