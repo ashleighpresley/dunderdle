@@ -6,7 +6,7 @@ import { render, screen } from "./test/test-utils";
 describe("Simple working test", () => {
   it("the title is visible", () => {
     render(<App />);
-    expect(screen.getByText(/Wordle/i)).toBeInTheDocument();
+    expect(screen.getByText(/Dunderdle/i)).toBeInTheDocument();
   });
   it("shows empty state", () => {
     useStore.getState().newGame([]);

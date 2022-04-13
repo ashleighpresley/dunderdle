@@ -5,7 +5,7 @@ export const ShareScreen = () => {
   const state = useStore();
   function copyToClipboard() {
     navigator.clipboard.writeText(
-      document.getElementById("wordle-share")?.innerText!
+      document.getElementById("dunderdle-share")?.innerText!
     );
     alert("Copied to clipboard!");
   }
@@ -14,8 +14,8 @@ export const ShareScreen = () => {
     theOfficeWordBank[today as keyof typeof theOfficeWordBank][0]["day"];
   return (
     <div className="text-center">
-      <div id="wordle-share">
-        <p>Wordle #{day}</p>
+      <div id="dunderdle-share">
+        <p>Dunderdle #{day}</p>
         {state.rows.map((row, i) => {
           return (
             <div key={i}>

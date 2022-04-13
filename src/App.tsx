@@ -35,7 +35,7 @@ export default function App() {
   }
 
   useEffect(() => {
-    const nextWordleCountdown = () => {
+    const nextWordCountdown = () => {
       const tomorrow = new Date();
       tomorrow.setDate(tomorrow.getDate() + 1);
       tomorrow.setHours(0, 0, 0, 0);
@@ -61,7 +61,7 @@ export default function App() {
       setSeconds(timeSeconds);
       setIsLoading(false);
     };
-    setInterval(nextWordleCountdown, 1000);
+    setInterval(nextWordCountdown, 1000);
   }, []);
 
   useEffect(() => {
@@ -119,7 +119,7 @@ export default function App() {
   return (
     <div>
       <div className="mx-auto w-96 relative">
-        <header className="border-b border-gray-300 pb-2 my-2 flex flex-col-5 gap-8 justify-center items-center">
+        <header className="border-b border-gray-300 pb-2 px-2 my-2 flex flex-col-5 gap-5 justify-center items-center">
           <Info
             size={22}
             onClick={() => {
@@ -134,7 +134,7 @@ export default function App() {
             }}
             className="cursor-pointer icon"
           />
-          <h1 className="text-4xl text-center tracking-tight">Wordle</h1>
+          <h1 className="text-4xl text-center tracking-tight">Dunderdle</h1>
           <Share
             size={22}
             onClick={() => {
@@ -187,7 +187,7 @@ export default function App() {
         {showStatsModal ? (
           <>
             <div
-              className={`justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ${
+              className={`justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ${
                 state.theme === "dark" ? darkTheme[1] : lightTheme[1]
               }`}
             >
@@ -224,7 +224,7 @@ export default function App() {
         {showInfoModal ? (
           <>
             <div
-              className={`justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ${
+              className={`justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ${
                 state.theme === "dark" ? darkTheme[1] : lightTheme[1]
               }`}
             >

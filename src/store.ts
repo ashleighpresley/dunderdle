@@ -107,7 +107,7 @@ export const useStore = create<StoreState>(
       };
     },
     {
-      name: "wordle", // unique name
+      name: "dunderdle", // unique name
     }
   )
 );
