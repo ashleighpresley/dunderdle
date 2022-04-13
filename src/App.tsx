@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Keyboard from "./Keyboard";
 import { useStore, GUESS_LENGTH } from "./store";
 import { isValidWord, LETTER_LENGTH } from "./word-utils";
@@ -195,7 +195,7 @@ export default function App() {
                   <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                     <h3 className="text-3xl font-semibold">Stats</h3>
                     <button
-                      className="text-red-500 font-bold uppercase text-sm px-6 py-3 rounded hover:text-red-700 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      className="font-bold uppercase text-sm px-6 py-3 rounded hover:text-red-700 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                       type="button"
                       onClick={() => setShowStatsModal(false)}
                     >
@@ -232,7 +232,7 @@ export default function App() {
                   <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                     <h3 className="text-3xl font-semibold">How to Play</h3>
                     <button
-                      className="text-red-500 font-bold uppercase text-sm px-6 py-3 rounded hover:text-red-700 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      className="font-bold uppercase text-sm px-6 py-3 rounded hover:text-red-700 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                       type="button"
                       onClick={() => setShowInfoModal(false)}
                     >
@@ -266,7 +266,7 @@ export default function App() {
                   <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                     <h3 className="text-3xl font-semibold">Share</h3>
                     <button
-                      className="text-red-500 font-bold uppercase text-sm px-6 py-3 rounded hover:text-red-700 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      className="font-bold uppercase text-sm px-6 py-3 rounded hover:text-red-700 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                       type="button"
                       onClick={() => setShowShareModal(false)}
                     >
@@ -321,7 +321,7 @@ export default function App() {
                   <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                     <h3 className="text-3xl font-semibold">Game Over</h3>
                     <button
-                      className="text-red-500 font-bold uppercase text-sm px-6 py-3 rounded hover:text-red-700 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      className="font-bold uppercase text-sm px-6 py-3 rounded hover:text-red-700 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                       type="button"
                       onClick={() => setShowGameOverModal(false)}
                     >
@@ -349,53 +349,54 @@ export default function App() {
       </div>
     </div>
   );
-}
 
-function useGuess(): [
-  string,
-  React.Dispatch<React.SetStateAction<string>>,
-  (letter: string) => void
-] {
-  const [guess, setGuess] = useState("");
+  function useGuess(): [
+    string,
+    React.Dispatch<React.SetStateAction<string>>,
+    (letter: string) => void
+  ] {
+    const [guess, setGuess] = useState("");
 
-  const addGuessLetter = (letter: string) => {
-    setGuess((curGuess) => {
-      const newGuess = letter.length === 1 ? curGuess + letter : curGuess;
-      switch (letter) {
-        case "Backspace":
-        case "<-":
-          return newGuess.slice(0, -1);
-        case "Enter":
-          if (newGuess.length === LETTER_LENGTH) {
-            return "";
-          }
-      }
+    const addGuessLetter = (letter: string) => {
+      setGuess((curGuess) => {
+        const newGuess = letter.length === 1 ? curGuess + letter : curGuess;
+        switch (letter) {
+          case "Backspace":
+          case "<-":
+            return newGuess.slice(0, -1);
+          case "Enter":
+            if (newGuess.length === LETTER_LENGTH) {
+              return "";
+            }
+        }
 
-      if (curGuess.length === LETTER_LENGTH) {
-        return curGuess;
-      }
+        if (curGuess.length === LETTER_LENGTH) {
+          return curGuess;
+        }
 
-      return newGuess;
-    });
-  };
+        return newGuess;
+      });
+    };
 
-  const onKeyDown = (e: KeyboardEvent) => {
-    let letter = e.key;
-    addGuessLetter(letter);
-  };
+    const onKeyDown = useCallback((event: KeyboardEvent) => {
+      let letter = event.key;
+      addGuessLetter(letter);
+    }, []);
 
-  useEffect(() => {
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, []);
+    if (state.gameState !== "playing") {
+      document.removeEventListener("keydown", onKeyDown);
+    } else {
+      document.addEventListener("keydown", onKeyDown);
+    }
 
-  return [guess, setGuess, addGuessLetter];
-}
+    return [guess, setGuess, addGuessLetter];
+  }
 
-function usePrevious<T>(value: T) {
-  const ref: any = useRef<T>();
-  useEffect(() => {
-    ref.current = value;
-  }, [value]);
-  return ref.current;
+  function usePrevious<T>(value: T) {
+    const ref: any = useRef<T>();
+    useEffect(() => {
+      ref.current = value;
+    }, [value]);
+    return ref.current;
+  }
 }
