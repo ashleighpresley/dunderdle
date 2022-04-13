@@ -35,8 +35,8 @@ export const InfoScreen = () => {
       <div className="text-sm text-center">
         <p>
           Let me know what you think! Send feedback to{" "}
-          <a href="https://www.buymeacoffee.com/ashleighp" target="_blank">
-            <u>ash92596</u>
+          <a href="https://twitter.com/ash92596" target="_blank">
+            <u>ash92596</u>.
           </a>
         </p>
         <p>
