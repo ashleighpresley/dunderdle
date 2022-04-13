@@ -1,6 +1,6 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
-import { computeGuess, getRandomWord, LetterState } from "./word-utils";
+import { computeGuess, getOfficeWord, LetterState } from "./word-utils";
 export const GUESS_LENGTH = 6;
 let wins = 0;
 let losses = 0;
@@ -82,14 +82,14 @@ export const useStore = create<StoreState>(
         }));
       }
       return {
-        answer: getRandomWord(),
+        answer: getOfficeWord(),
         rows: [],
         gameState: "playing",
         keyboardLetterState: {},
         addGuess,
         newGame: (initialRows = []) => {
           set({
-            answer: getRandomWord(),
+            answer: getOfficeWord(),
             rows: [],
             gameState: "playing",
             keyboardLetterState: {},
