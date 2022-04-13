@@ -33,9 +33,9 @@ export default function App() {
         now.getFullYear(),
         now.getMonth(),
         now.getDate(),
+        11,
+        30,
         10,
-        49,
-        50,
         0
       ).getTime() - now.getTime();
     if (milsTilMidnight < 0) {
