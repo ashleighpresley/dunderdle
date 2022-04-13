@@ -34,6 +34,13 @@ export const InfoScreen = () => {
       </div>
       <div className="text-sm text-center">
         <p>
+          Dunderdle is a{" "}
+          <a href="https://www.nbc.com/the-office/about" target="_blank">
+            <em>The Office</em>
+          </a>{" "}
+          themed Wordle game.
+        </p>
+        <p>
           Let me know what you think! Send feedback to{" "}
           <a href="https://twitter.com/ash92596" target="_blank">
             <u>ash92596</u>.
