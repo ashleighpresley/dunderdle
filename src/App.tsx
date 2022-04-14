@@ -93,7 +93,6 @@ export default function App() {
 
   const numGuessesRemaining = GUESS_LENGTH - rows.length;
   const isGameOver = state.gameState !== "playing";
-  isGameOver ? () => setShowGameOverModal(true) : null;
 
   rows = rows.concat(Array(numGuessesRemaining).fill(""));
 
@@ -308,50 +307,6 @@ export default function App() {
               {hours}:{minutes}:{seconds}
             </p>
           </div>
-        ) : null}
-
-        {isGameOver && showGameOverModal ? (
-          <>
-            <div
-              className={`justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ${
-                state.theme === "dark" ? darkTheme[1] : lightTheme[1]
-              }`}
-            >
-              <div className="relative w-auto my-6 mx-auto max-w-3xl">
-                {/*content*/}
-                <div
-                  className={`border-0 rounded-lg shadow-lg relative flex flex-col w-full outline-none focus:outline-none ${
-                    state.theme === "dark" ? darkTheme[0] : lightTheme[0]
-                  }`}
-                >
-                  {/*header*/}
-                  <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                    <h3 className="text-3xl font-semibold">Game Over</h3>
-                    <button
-                      className="font-bold uppercase text-sm px-6 py-3 rounded hover:text-red-700 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                      type="button"
-                      onClick={() => setShowGameOverModal(false)}
-                    >
-                      <XCircle size={22} className={"icon"} />
-                    </button>
-                  </div>
-                  {/*body*/}
-                  <div className="relative p-6 flex-auto text-center">
-                    <h2 className="text-xl">You {state.gameState}!</h2>
-                    <h2>The word was:</h2>
-                    <div>
-                      <WordRow letters={state.answer} />
-                    </div>
-                    <h1 className="pt-4">Next word:</h1>
-                    <p>
-                      {hours}:{minutes}:{seconds}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-          </>
         ) : null}
       </div>
     </div>

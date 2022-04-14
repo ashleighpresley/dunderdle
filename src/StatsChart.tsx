@@ -9,7 +9,7 @@ export const StatsChart = () => {
     <div>
       <Bar
         data={{
-          labels: ["0", "1", "2", "3", "4", "5"],
+          labels: ["1", "2", "3", "4", "5", "6"],
           datasets: [
             {
               label: "Guess Distribution",
