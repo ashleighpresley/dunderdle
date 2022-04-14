@@ -6,8 +6,12 @@ export const InfoScreen = () => {
       <div className="text-sm pb-8 border-b my-4 leading-relaxed flex flex-col gap-2">
         <p>Guess the word in six tries!</p>
         <p>
-          Each guess must be a valid five-letter word. Hit the enter button to
-          submit.
+          Each guess must be a valid five-letter word (keep in mind it could be
+          a name!). Hit the enter button to submit.
+        </p>
+        <p>
+          You can enter in any valid 5 letter word, but the answer will be
+          something relating to the show <em>The Office</em>
         </p>
         <p>
           After each guess, the color of the tiles will change to show how close
