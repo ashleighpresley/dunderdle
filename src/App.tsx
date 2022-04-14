@@ -327,10 +327,11 @@ export default function App() {
       setGuess((curGuess) => {
         const newGuess = letter.length === 1 ? curGuess + letter : curGuess;
         switch (letter) {
-          case "Backspace":
+          case "backspace":
           case "<-":
             return newGuess.slice(0, -1);
           case "Enter":
+          case "enter":
             if (newGuess.length === LETTER_LENGTH) {
               return "";
             }
@@ -346,6 +347,7 @@ export default function App() {
 
     const onKeyDown = useCallback((event: KeyboardEvent) => {
       let letter = event.key;
+      letter = letter.toLowerCase();
       addGuessLetter(letter);
     }, []);
 
