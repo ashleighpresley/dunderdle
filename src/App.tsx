@@ -34,6 +34,10 @@ export default function App() {
     setGuess("");
   }
 
+  if (isNaN(state.winRate)) {
+    state.winRate = 0;
+  }
+
   useEffect(() => {
     const nextWordCountdown = () => {
       const tomorrow = new Date();
