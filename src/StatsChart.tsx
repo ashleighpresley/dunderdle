@@ -1,7 +1,23 @@
 import { useStore } from "./store";
 import { Bar } from "react-chartjs-2";
-import { Chart, registerables } from "chart.js";
-Chart.register(...registerables);
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 export const StatsChart = () => {
   const state = useStore();

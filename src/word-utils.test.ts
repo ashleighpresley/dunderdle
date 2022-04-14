@@ -73,8 +73,8 @@ describe("computeGuess", () => {
   it("only shows one present when letter is guessed multiple times", () => {
     expect(computeGuess("alloy", "linux")).toEqual([
       LetterState.Miss,
-      LetterState.Miss,
       LetterState.Present,
+      LetterState.Miss,
       LetterState.Miss,
       LetterState.Miss,
     ]);
