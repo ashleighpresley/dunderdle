@@ -39,14 +39,17 @@ export const useStore = create<StoreState>(
         const didWin = result.every((i) => i === LetterState.Match);
         const rows = [...get().rows, { guess, result }];
 
-        didWin
-          ? ((wins += 1),
-            (curStreak += 1),
-            curStreak >= bestStreak ? (bestStreak = curStreak) : bestStreak,
-            (winDistribution[rows.length - 1] += 1))
-          : rows.length === GUESS_LENGTH
-          ? ((losses += 1), (curStreak = 0))
-          : null;
+        if (didWin) {
+          wins++;
+          curStreak++;
+          if (curStreak > bestStreak) {
+            bestStreak = curStreak;
+          }
+          winDistribution[rows.length - 1]++;
+        } else if (rows.length === GUESS_LENGTH) {
+          losses++;
+          curStreak = 0;
+        }
 
         const keyboardLetterState = get().keyboardLetterState;
         result.forEach((r, index) => {
