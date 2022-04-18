@@ -34,7 +34,7 @@ export default function App() {
     setGuess("");
   }
 
-  if (isNaN(state.winRate)) {
+  if (isNaN(state.winRate) && state.losses <= 0 && state.wins <= 0) {
     state.winRate = 0;
   }
 

@@ -4,11 +4,16 @@ import theOfficeWordBank from "./the-office-word-bank.json";
 export const ShareScreen = () => {
   const state = useStore();
   function copyToClipboard() {
-    navigator.clipboard.writeText(
-      document.getElementById("dunderdle-share")?.innerText!
-    );
-    alert("Copied to clipboard!");
+    navigator.clipboard
+      .writeText(document.getElementById("dunderdle-share")?.innerText!)
+      .then(() => {
+        alert("Copied to clipboard!");
+      })
+      .catch(() => {
+        alert("Something went wrong.");
+      });
   }
+
   const today = new Date().toLocaleDateString("en-US") as string;
   let day =
     theOfficeWordBank[today as keyof typeof theOfficeWordBank][0]["day"];
