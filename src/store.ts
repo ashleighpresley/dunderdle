@@ -71,7 +71,9 @@ export const useStore = create<StoreState>(
             ? 0
             : get().curStreak,
           bestStreak:
-            curStreak >= bestStreak ? get().curStreak : get().bestStreak,
+            get().curStreak >= get().bestStreak
+              ? get().curStreak
+              : get().bestStreak,
           losses:
             !didWin && rows.length === GUESS_LENGTH
               ? (get().losses += 1)
