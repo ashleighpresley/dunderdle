@@ -51,6 +51,13 @@ export const InfoScreen = () => {
           </a>
         </p>
         <p>
+          Join the{" "}
+          <a href="https://www.facebook.com/groups/dunderdle" target="_blank">
+            <u>Dunderdle Facebook group</u>
+          </a>{" "}
+          to post your results and discuss the word of the day!{" "}
+        </p>
+        <p>
           This game will be free and ad-free forever, but you can{" "}
           <a href="https://www.buymeacoffee.com/ashleighp" target="_blank">
             <u>buy me a coffee</u>
