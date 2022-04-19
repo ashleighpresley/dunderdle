@@ -39,18 +39,6 @@ export const useStore = create<StoreState>(
         const didWin = result.every((i) => i === LetterState.Match);
         const rows = [...get().rows, { guess, result }];
 
-        if (didWin) {
-          wins++;
-          curStreak++;
-          if (curStreak > bestStreak) {
-            bestStreak = curStreak;
-          }
-          winDistribution[rows.length - 1]++;
-        } else if (rows.length === GUESS_LENGTH) {
-          losses++;
-          curStreak = 0;
-        }
-
         const keyboardLetterState = get().keyboardLetterState;
         result.forEach((r, index) => {
           const resultGuessLetter = guess[index];
@@ -68,6 +56,8 @@ export const useStore = create<StoreState>(
           }
         });
 
+        didWin ? winDistribution[rows.length - 1]++ : null;
+
         set(() => ({
           rows,
           keyboardLetterState,
@@ -76,14 +66,22 @@ export const useStore = create<StoreState>(
             : rows.length === GUESS_LENGTH
             ? "lost"
             : "playing",
-          wins,
-          losses,
-          winRate: Math.round((wins / (wins + losses)) * 100),
-          curStreak,
-          bestStreak,
-          winDistribution,
+          wins: didWin ? (get().wins += 1) : get().wins,
+          curStreak: didWin
+            ? (get().curStreak += 1)
+            : rows.length === GUESS_LENGTH
+            ? 0
+            : get().curStreak,
+          bestStreak:
+            curStreak >= bestStreak ? get().curStreak : get().bestStreak,
+          losses:
+            !didWin && rows.length === GUESS_LENGTH
+              ? (get().losses += 1)
+              : get().losses,
+          winRate: Math.round((get().wins / (get().wins + get().losses)) * 100),
         }));
       }
+
       return {
         answer: getOfficeWord(),
         rows: [],
