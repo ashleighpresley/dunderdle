@@ -56,8 +56,6 @@ export const useStore = create<StoreState>(
           }
         });
 
-        didWin ? winDistribution[rows.length - 1]++ : null;
-
         set(() => ({
           rows,
           keyboardLetterState,
@@ -79,6 +77,11 @@ export const useStore = create<StoreState>(
               ? (get().losses += 1)
               : get().losses,
           winRate: Math.round((get().wins / (get().wins + get().losses)) * 100),
+          winDistribution: didWin
+            ? get().winDistribution.map((i, index) =>
+                index === rows.length - 1 ? (i += 1) : i
+              )
+            : get().winDistribution,
         }));
       }
 
