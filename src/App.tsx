@@ -308,7 +308,9 @@ export default function App() {
             </div>
             <h1 className="pt-4">Next word:</h1>
             <p>
-              {hours}:{minutes}:{seconds}
+              {hours < 0 || minutes < 0 || seconds < 0
+                ? "Come Back Tomorrow!"
+                : `${hours}:${minutes}:${seconds}`}
             </p>
           </div>
         ) : null}
