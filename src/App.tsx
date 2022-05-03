@@ -308,12 +308,8 @@ export default function App() {
                     setHideDundie(true);
                   }, 6000),
                   (
-                    <div>
-                      <img
-                        src="./src/images/wonDundie.png"
-                        id="wonDundie"
-                        className={`p-12`}
-                      />
+                    <div className="p-12">
+                      <img src="./src/images/wonDundie.png" />
                       <Confetti width={300} height={400} />
                     </div>
                   ))
