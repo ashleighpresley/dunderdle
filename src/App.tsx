@@ -9,6 +9,7 @@ import { StatsScreen } from "./StatsScreen";
 import { InfoScreen } from "./InfoScreen";
 import { ShareScreen } from "./ShareScreen";
 import theOfficeWordBank from "./the-office-word-bank.json";
+import Confetti from "react-confetti";
 
 export default function App() {
   const state = useStore();
@@ -19,7 +20,7 @@ export default function App() {
   const [showStatsModal, setShowStatsModal] = React.useState(false);
   const [showInfoModal, setShowInfoModal] = React.useState(false);
   const [showShareModal, setShowShareModal] = React.useState(false);
-  const [showGameOverModal, setShowGameOverModal] = React.useState(false);
+  const [hideDundie, setHideDundie] = useState(false);
   const [hours, setHours] = useState(10);
   const [minutes, setMinutes] = useState(10);
   const [seconds, setSeconds] = useState(10);
@@ -294,24 +295,48 @@ export default function App() {
           </>
         ) : null}
 
-        {isGameOver && !showGameOverModal ? (
-          <div
-            role="modal"
-            className={` ${
-              state.theme === "dark"
-                ? darkTheme[0] + " " + darkTheme[1]
-                : lightTheme[0] + " " + lightTheme[1]
-            } absolute inset-x-0 bottom-0 p-10 text-center mx-auto rounded shadow-lg opacity-90`}
-          >
-            <div className="">
-              <WordRow letters={state.answer} />
+        {isGameOver ? (
+          <div>
+            <div
+              role="modal"
+              className={`absolute inset-x-9 top-14 transition-all duration-1000 opacity-1 ${
+                hideDundie ? "opacity-0" : "opacity-100"
+              }`}
+            >
+              {state.gameState === "won"
+                ? (setTimeout(function () {
+                    setHideDundie(true);
+                  }, 6000),
+                  (
+                    <div>
+                      <img
+                        src="./src/images/wonDundie.png"
+                        id="wonDundie"
+                        className={`p-12`}
+                      />
+                      <Confetti width={300} height={400} />
+                    </div>
+                  ))
+                : null}
             </div>
-            <h1 className="pt-4">Next word:</h1>
-            <p>
-              {hours < 0 || minutes < 0 || seconds < 0
-                ? "Come Back Tomorrow!"
-                : `${hours}:${minutes}:${seconds}`}
-            </p>
+            <div
+              role="modal"
+              className={` ${
+                state.theme === "dark"
+                  ? darkTheme[0] + " " + darkTheme[1]
+                  : lightTheme[0] + " " + lightTheme[1]
+              } absolute inset-x-0 bottom-0 p-10 text-center mx-auto rounded shadow-lg opacity-90`}
+            >
+              <div className="">
+                <WordRow letters={state.answer} />
+              </div>
+              <h1 className="pt-4">Next word:</h1>
+              <p>
+                {hours < 0 || minutes < 0 || seconds < 0
+                  ? "Come Back Tomorrow!"
+                  : `${hours}:${minutes}:${seconds}`}
+              </p>
+            </div>
           </div>
         ) : null}
       </div>
