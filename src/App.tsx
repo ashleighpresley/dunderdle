@@ -309,7 +309,7 @@ export default function App() {
                   }, 6000),
                   (
                     <div className="p-12">
-                      <img src="./src/images/wonDundie.png" />
+                      <img src="https://bucketdrum.s3.amazonaws.com/wonDundie.png" />
                       <Confetti width={300} height={400} />
                     </div>
                   ))
