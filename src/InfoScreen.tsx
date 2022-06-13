@@ -1,6 +1,18 @@
+import { useState } from "react";
+import { useStore } from "./store";
 import WordRow from "./WordRow";
+import theOfficeWordBank from "./the-office-word-bank.json";
 
 export const InfoScreen = () => {
+  const [buttonText, setButtonText] = useState("Click here for a hint");
+  const today = new Date().toLocaleDateString("en-US") as string;
+  let day =
+    theOfficeWordBank[today as keyof typeof theOfficeWordBank][0]["hint"];
+  function handleClick() {
+    buttonText === "Click here for a hint"
+      ? setButtonText(day)
+      : setButtonText("Click here for a hint");
+  }
   return (
     <div>
       <div className="text-sm pb-8 border-b my-4 leading-relaxed flex flex-col gap-2">
@@ -19,22 +31,34 @@ export const InfoScreen = () => {
         </p>
         <p>A new Dunderdle will be available each day.</p>
       </div>
-      <div className="text-sm pb-8 border-b my-4 leading-relaxed flex flex-col gap-2">
-        <p className="font-bold">Examples</p>
-        <WordRow letters={"jello"} result={[2]} />
-        <p>
-          The letter <strong>J</strong> is in the word and it's in the correct
-          spot.
-        </p>
-        <WordRow letters={"fires"} result={[null!, 1]} />
-        <p>
-          The letter <strong>I</strong> is in the word but it's in the wrong
-          spot.
-        </p>
-        <WordRow letters={"farms"} result={[null!, null!, null!, 0]} />
-        <p>
-          The letter <strong>M</strong> is not in the word in any spot.
-        </p>
+      <div className="flex flex-col items-center">
+        <div className="text-sm pb-8 border-b my-4 leading-relaxed flex flex-col gap-2 max-w-sm">
+          <p className="font-bold">Examples</p>
+          <WordRow letters={"jello"} result={[2]} />
+          <p>
+            The letter <strong>J</strong> is in the word and it's in the correct
+            spot.
+          </p>
+          <WordRow letters={"fires"} result={[null!, 1]} />
+          <p>
+            The letter <strong>I</strong> is in the word but it's in the wrong
+            spot.
+          </p>
+          <WordRow letters={"farms"} result={[null!, null!, null!, 0]} />
+          <p>
+            The letter <strong>M</strong> is not in the word in any spot.
+          </p>
+        </div>
+      </div>
+      <div className="text-sm pb-8 border-b my-4 leading-relaxed flex flex-col gap-2 text-center">
+        <p className="font-bold">Need help with todays word?</p>
+        <button
+          className="block border-transparent	border-2 hover:border-gray-200 italic"
+          id="hint-button"
+          onClick={handleClick}
+        >
+          {buttonText}
+        </button>
       </div>
       <div className="text-sm text-center">
         <p>
