@@ -82,7 +82,7 @@ export const InfoScreen = () => {
           to post your results and discuss the word of the day!{" "}
         </p>
         <p>
-          This game will be free and ad-free forever, but you can{" "}
+          This game will be free but you can{" "}
           <a href="https://www.buymeacoffee.com/ashleighp" target="_blank">
             <u>buy me a coffee</u>
           </a>{" "}
