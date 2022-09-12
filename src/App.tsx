@@ -18,6 +18,7 @@ export default function App() {
   const previousGuess = usePrevious(guess);
   const [showInvalidGuess, setInvalidGuess] = useState(false);
   const [showStatsModal, setShowStatsModal] = React.useState(false);
+  const [showPopupModal, setShowPopupModal] = React.useState(true);
   const [showInfoModal, setShowInfoModal] = React.useState(false);
   const [showShareModal, setShowShareModal] = React.useState(false);
   const [hideDundie, setHideDundie] = useState(false);
@@ -160,6 +161,32 @@ export default function App() {
             />
           )}
         </header>
+
+        {showPopupModal ? (
+          <>
+            <div className="alert bg-sky-400 p-4 mb-4 text-white opacity-100 transition-opacity">
+              <div className="flex items-start justify-between pb-2 border-b border-solid border-slate-200 rounded-t">
+                <h3 className="text-3xl font-semibold">Important!</h3>
+                <button
+                  className="font-bold uppercase text-sm rounded hover:text-blue-700 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  type="button"
+                  onClick={() => setShowPopupModal(false)}
+                >
+                  <XCircle size={22} className={"icon"} />
+                </button>
+              </div>
+              <p className="pt-2">
+                <strong>September 14th</strong> will be the last of the
+                once-a-day Dunderdle. I hope you have enjoyed these past 165
+                days as much as I have but I have now run out of unique 5 letter
+                words! On <strong>September 15 at 10:00 AM CST</strong>, I will
+                transition this game to an endless version that - while still
+                being <em>The Office</em> themed - will allow you to click ' New
+                Game' to guess a random word as much as you'd like.
+              </p>
+            </div>
+          </>
+        ) : null}
 
         <main
           className={`grid grid-rows-6 gap-1.5 mb-4 px-8 ${

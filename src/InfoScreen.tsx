@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useStore } from "./store";
 import WordRow from "./WordRow";
 import theOfficeWordBank from "./the-office-word-bank.json";
 
