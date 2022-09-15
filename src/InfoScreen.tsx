@@ -1,17 +1,6 @@
-import { useState } from "react";
 import WordRow from "./WordRow";
-import theOfficeWordBank from "./the-office-word-bank.json";
 
 export const InfoScreen = () => {
-  const [buttonText, setButtonText] = useState("Click here for a hint");
-  const today = new Date().toLocaleDateString("en-US") as string;
-  let day =
-    theOfficeWordBank[today as keyof typeof theOfficeWordBank][0]["hint"];
-  function handleClick() {
-    buttonText === "Click here for a hint"
-      ? setButtonText(day)
-      : setButtonText("Click here for a hint");
-  }
   return (
     <div>
       <div className="text-sm pb-8 border-b my-4 leading-relaxed flex flex-col gap-2">
@@ -28,7 +17,6 @@ export const InfoScreen = () => {
           After each guess, the color of the tiles will change to show how close
           your guess was to the word.
         </p>
-        <p>A new Dunderdle will be available each day.</p>
       </div>
       <div className="flex flex-col items-center">
         <div className="text-sm pb-8 border-b my-4 leading-relaxed flex flex-col gap-2 max-w-sm">
@@ -49,16 +37,6 @@ export const InfoScreen = () => {
           </p>
         </div>
       </div>
-      <div className="text-sm pb-8 border-b my-4 leading-relaxed flex flex-col gap-2 text-center">
-        <p className="font-bold">Need help with todays word?</p>
-        <button
-          className="block border-transparent	border-2 hover:border-gray-200 italic"
-          id="hint-button"
-          onClick={handleClick}
-        >
-          {buttonText}
-        </button>
-      </div>
       <div className="text-sm text-center">
         <p>
           Dunderdle is a{" "}
@@ -78,7 +56,7 @@ export const InfoScreen = () => {
           <a href="https://www.facebook.com/groups/dunderdle" target="_blank">
             <u>Dunderdle Facebook group</u>
           </a>{" "}
-          to post your results and discuss the word of the day!{" "}
+          to post your results and streaks!{" "}
         </p>
         <p>
           This game will be free but you can{" "}

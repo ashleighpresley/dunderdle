@@ -1,28 +1,38 @@
 import wordBank from "./word-bank.json";
 
-import officeWordBank from "./office-word-bank.json";
-
 import theOfficeWordBank from "./the-office-word-bank.json";
 
 export const LETTER_LENGTH = 5;
 
-// Office Wordle Version
-// export function getRandomWord() {
-//   const randomIndex = Math.floor(Math.random() * officeWordBank.length);
-//   return officeWordBank[randomIndex];
-// }
+let randomIndexInit = "";
 
-export function getOfficeWord() {
-  const today = new Date().toLocaleDateString("en-US") as string;
-  let word =
-    theOfficeWordBank[today as keyof typeof theOfficeWordBank][0]["word"];
-  return word;
+let last_key = parseInt(
+  Object.keys(theOfficeWordBank)[Object.values(theOfficeWordBank).length - 1]
+);
+
+function randomIndex() {
+  const randomIndex = Math.floor(Math.random() * last_key).toString();
+  randomIndexInit = randomIndex;
+
+  return randomIndex;
 }
-// Normal Wordle Version
-// export function getRandomWord() {
-//   const randomIndex = Math.floor(Math.random() * wordBank.length);
-//   return wordBank[randomIndex];
-// }
+
+//Office Wordle Version
+export function getRandomWord() {
+  return theOfficeWordBank[randomIndex() as keyof typeof theOfficeWordBank][0][
+    "word"
+  ];
+}
+
+export function getHint() {
+  return theOfficeWordBank[
+    randomIndexInit as keyof typeof theOfficeWordBank
+  ][0]["hint"];
+}
+
+export function getNumber() {
+  return randomIndexInit;
+}
 
 export enum LetterState {
   Miss,
@@ -93,6 +103,8 @@ export function computeGuess(
 }
 
 export function isValidWord(word: string): boolean {
-  // return wordBank.includes(word);
-  return wordBank.includes(word) || officeWordBank.includes(word);
+  return (
+    wordBank.includes(word) ||
+    JSON.stringify(theOfficeWordBank).indexOf(word) > -1
+  );
 }

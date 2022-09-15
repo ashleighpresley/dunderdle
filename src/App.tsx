@@ -3,12 +3,12 @@ import Keyboard from "./Keyboard";
 import { useStore, GUESS_LENGTH } from "./store";
 import { isValidWord, LETTER_LENGTH } from "./word-utils";
 import WordRow from "./WordRow";
-import { Info, ChartLine, Share, Moon, Sun, XCircle } from "phosphor-react";
+import { Info, ChartLine, Share, Star, XCircle } from "phosphor-react";
 import { StatsChart } from "./StatsChart";
 import { StatsScreen } from "./StatsScreen";
 import { InfoScreen } from "./InfoScreen";
 import { ShareScreen } from "./ShareScreen";
-import theOfficeWordBank from "./the-office-word-bank.json";
+import { HintScreen } from "./HintScreen";
 import Confetti from "react-confetti";
 
 export default function App() {
@@ -18,57 +18,14 @@ export default function App() {
   const previousGuess = usePrevious(guess);
   const [showInvalidGuess, setInvalidGuess] = useState(false);
   const [showStatsModal, setShowStatsModal] = React.useState(false);
-  const [showPopupModal, setShowPopupModal] = React.useState(true);
   const [showInfoModal, setShowInfoModal] = React.useState(false);
   const [showShareModal, setShowShareModal] = React.useState(false);
+  const [showHintModal, setShowHintModal] = React.useState(false);
   const [hideDundie, setHideDundie] = useState(false);
-  const [hours, setHours] = useState(10);
-  const [minutes, setMinutes] = useState(10);
-  const [seconds, setSeconds] = useState(10);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const today = new Date().toLocaleDateString("en-US") as string;
-  let word =
-    theOfficeWordBank[today as keyof typeof theOfficeWordBank][0]["word"];
-
-  if (state.answer != word) {
-    state.newGame();
-    setGuess("");
-  }
 
   if (isNaN(state.winRate) && state.losses <= 0 && state.wins <= 0) {
     state.winRate = 0;
   }
-
-  useEffect(() => {
-    const nextWordCountdown = () => {
-      const tomorrow = new Date();
-      tomorrow.setDate(tomorrow.getDate() + 1);
-      tomorrow.setHours(0, 0, 0, 0);
-      const today = new Date().getTime();
-
-      const timeDiff = tomorrow.getTime() - today;
-
-      const seconds = 1000;
-      const minutes = seconds * 60;
-      const hours = minutes * 60;
-      const days = hours * 24;
-
-      let timeHours = Math.floor((timeDiff % days) / hours);
-      let timeMinutes = Math.floor((timeDiff % hours) / minutes);
-      let timeSeconds = Math.floor((timeDiff % minutes) / seconds);
-
-      timeHours = timeHours < 10 ? 0 + timeHours : timeHours;
-      timeMinutes = timeMinutes < 10 ? 0 + timeMinutes : timeMinutes;
-      timeSeconds = timeSeconds < 10 ? 0 + timeSeconds : timeSeconds;
-
-      setHours(timeHours);
-      setMinutes(timeMinutes);
-      setSeconds(timeSeconds);
-      setIsLoading(false);
-    };
-    setInterval(nextWordCountdown, 1000);
-  }, []);
 
   useEffect(() => {
     let id: any;
@@ -147,46 +104,14 @@ export default function App() {
             }}
             className="cursor-pointer icon"
           />
-          {state.theme === "light" ? (
-            <Moon
-              size={22}
-              onClick={() => (state.theme = "dark")}
-              className="cursor-pointer icon"
-            />
-          ) : (
-            <Sun
-              size={22}
-              onClick={() => (state.theme = "light")}
-              className="cursor-pointer icon"
-            />
-          )}
+          <Star
+            size={22}
+            onClick={() => {
+              setShowHintModal(true);
+            }}
+            className="cursor-pointer icon"
+          />
         </header>
-
-        {showPopupModal ? (
-          <>
-            <div className="alert bg-sky-400 p-4 mb-4 text-white opacity-100 transition-opacity">
-              <div className="flex items-start justify-between pb-2 border-b border-solid border-slate-200 rounded-t">
-                <h3 className="text-3xl font-semibold">Important!</h3>
-                <button
-                  className="font-bold uppercase text-sm rounded hover:text-blue-700 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                  type="button"
-                  onClick={() => setShowPopupModal(false)}
-                >
-                  <XCircle size={22} className={"icon"} />
-                </button>
-              </div>
-              <p className="pt-2">
-                <strong>September 14th</strong> will be the last of the
-                once-a-day Dunderdle. I hope you have enjoyed these past 165
-                days as much as I have but I have now run out of unique 5 letter
-                words! On <strong>September 15 at 10:00 AM CST</strong>, I will
-                transition this game to an endless version that - while still
-                being <em>The Office</em> themed - will allow you to click ' New
-                Game' to guess a random word as much as you'd like.
-              </p>
-            </div>
-          </>
-        ) : null}
 
         <main
           className={`grid grid-rows-6 gap-1.5 mb-4 px-8 ${
@@ -245,6 +170,21 @@ export default function App() {
                     {<StatsScreen />}
                     {<StatsChart />}
                   </div>
+                  <button
+                    className="play-again-btn block border rounded border-emerald-500 bg-emerald-500 p-1 mb-4 mx-auto shadow text-white hover:shadow-lg"
+                    onClick={() => {
+                      let confirmAction = confirm(
+                        "Are you sure you want to reset your stats?"
+                      );
+                      if (confirmAction) {
+                        localStorage.removeItem("dunderdle"),
+                          window.location.reload();
+                      } else {
+                      }
+                    }}
+                  >
+                    Reset Stats
+                  </button>
                 </div>
               </div>
             </div>
@@ -322,6 +262,64 @@ export default function App() {
           </>
         ) : null}
 
+        {showHintModal ? (
+          <>
+            <div
+              className={`justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ${
+                state.theme === "dark" ? darkTheme[1] : lightTheme[1]
+              }`}
+            >
+              <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                {/*content*/}
+                <div
+                  className={`border-0 rounded-lg shadow-lg relative flex flex-col w-full outline-none focus:outline-none ${
+                    state.theme === "dark" ? darkTheme[0] : lightTheme[0]
+                  }`}
+                >
+                  {/*header*/}
+                  <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                    <h3 className="text-3xl font-semibold">Hint</h3>
+                    <button
+                      className="font-bold uppercase text-sm px-6 py-3 rounded hover:text-red-700 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                      onClick={() => setShowHintModal(false)}
+                    >
+                      <XCircle size={22} className={"icon"} />
+                    </button>
+                  </div>
+                  {/*body*/}
+                  <div className="relative p-6 flex-auto">{<HintScreen />}</div>
+                  <div className="flex items-start justify-between px-5 gap-8">
+                    <button
+                      className="play-again-btn block border rounded border-emerald-500 bg-emerald-500 p-2 mb-4 mx-auto shadow text-white hover:shadow-lg"
+                      id="game-mode"
+                      onClick={() => {
+                        state.theme === "light"
+                          ? ((state.theme = "dark"), setShowHintModal(false))
+                          : ((state.theme = "light"), setShowHintModal(false));
+                      }}
+                    >
+                      Switch to{" "}
+                      {state.theme === "light" ? "Dark Mode" : "Light Mode"}
+                    </button>
+                    <button
+                      className="play-again-btn block border rounded border-emerald-500 bg-emerald-500 p-2 mb-4 mx-auto shadow text-white hover:shadow-lg"
+                      onClick={() => {
+                        state.newGame();
+                        setGuess("");
+                        setShowHintModal(false);
+                      }}
+                    >
+                      New Game
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+          </>
+        ) : null}
+
         {isGameOver ? (
           <div>
             <div
@@ -353,12 +351,15 @@ export default function App() {
               <div className="">
                 <WordRow letters={state.answer} />
               </div>
-              <h1 className="pt-4">Next word:</h1>
-              <p>
-                {hours < 0 || minutes < 0 || seconds < 0
-                  ? "Come Back Tomorrow!"
-                  : `${hours}:${minutes}:${seconds}`}
-              </p>
+              <button
+                className="play-again-btn block border rounded border-emerald-500 bg-emerald-500 p-2 mt-4 mx-auto shadow text-white hover:shadow-lg"
+                onClick={() => {
+                  state.newGame();
+                  setGuess("");
+                }}
+              >
+                New Game
+              </button>
             </div>
           </div>
         ) : null}
