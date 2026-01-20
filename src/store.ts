@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { computeGuess, getOfficeWord, LetterState } from "./word-utils";
 export const GUESS_LENGTH = 6;
@@ -31,7 +31,7 @@ interface StoreState {
   theme: string;
 }
 
-export const useStore = create<StoreState>(
+export const useStore = create<StoreState>()(
   persist(
     (set, get) => {
       function addGuess(guess: string) {

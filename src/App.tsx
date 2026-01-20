@@ -3,7 +3,7 @@ import Keyboard from "./Keyboard";
 import { useStore, GUESS_LENGTH } from "./store";
 import { isValidWord, LETTER_LENGTH } from "./word-utils";
 import WordRow from "./WordRow";
-import { Info, ChartLine, Share, Moon, Sun, XCircle } from "phosphor-react";
+import { Info, ChartLine, Share, Moon, Sun, XCircle } from "@phosphor-icons/react";
 import { StatsChart } from "./StatsChart";
 import { StatsScreen } from "./StatsScreen";
 import { InfoScreen } from "./InfoScreen";
@@ -17,11 +17,12 @@ export default function App() {
   const addGuess = useStore((s) => s.addGuess);
   const previousGuess = usePrevious(guess);
   const [showInvalidGuess, setInvalidGuess] = useState(false);
-  const [showStatsModal, setShowStatsModal] = React.useState(false);
-  const [showPopupModal, setShowPopupModal] = React.useState(true);
-  const [showInfoModal, setShowInfoModal] = React.useState(false);
-  const [showShareModal, setShowShareModal] = React.useState(false);
-  const [hideDundie, setHideDundie] = useState(false);
+  const [showStatsModal, setShowStatsModal] = useState(false);
+  const [showPopupModal, setShowPopupModal] = useState(true);
+  const [showInfoModal, setShowInfoModal] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
+  const [showWinAnimation, setShowWinAnimation] = useState(false);
+  const [dundieVisible, setDundieVisible] = useState(false);
   const [hours, setHours] = useState(10);
   const [minutes, setMinutes] = useState(10);
   const [seconds, setSeconds] = useState(10);
@@ -71,12 +72,36 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    let id: any;
+    let id: NodeJS.Timeout;
     if (showInvalidGuess) {
       id = setTimeout(() => setInvalidGuess(false), 1500);
     }
     return () => clearTimeout(id);
   }, [showInvalidGuess]);
+
+  // Handle win animation timing
+  useEffect(() => {
+    if (state.gameState === "won") {
+      // Small delay before showing animation for smoother feel
+      const showTimer = setTimeout(() => {
+        setShowWinAnimation(true);
+        setDundieVisible(true);
+      }, 300);
+
+      // Hide the dundie after 6 seconds
+      const hideTimer = setTimeout(() => {
+        setDundieVisible(false);
+      }, 6300);
+
+      return () => {
+        clearTimeout(showTimer);
+        clearTimeout(hideTimer);
+      };
+    } else {
+      setShowWinAnimation(false);
+      setDundieVisible(false);
+    }
+  }, [state.gameState]);
 
   useEffect(() => {
     if (guess.length === 0 && previousGuess?.length === LETTER_LENGTH) {
@@ -161,32 +186,6 @@ export default function App() {
             />
           )}
         </header>
-
-        {showPopupModal ? (
-          <>
-            <div className="alert bg-sky-400 p-4 mb-4 text-white opacity-100 transition-opacity">
-              <div className="flex items-start justify-between pb-2 border-b border-solid border-slate-200 rounded-t">
-                <h3 className="text-3xl font-semibold">Important!</h3>
-                <button
-                  className="font-bold uppercase text-sm rounded hover:text-blue-700 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                  type="button"
-                  onClick={() => setShowPopupModal(false)}
-                >
-                  <XCircle size={22} className={"icon"} />
-                </button>
-              </div>
-              <p className="pt-2">
-                <strong>September 14th</strong> will be the last of the
-                once-a-day Dunderdle. I hope you have enjoyed these past 165
-                days as much as I have but I have now run out of unique 5 letter
-                words! On <strong>September 15 at 10:00 AM CST</strong>, I will
-                transition this game to an endless version that - while still
-                being <em>The Office</em> themed - will allow you to click ' New
-                Game' to guess a random word as much as you'd like.
-              </p>
-            </div>
-          </>
-        ) : null}
 
         <main
           className={`grid grid-rows-6 gap-1.5 mb-4 px-8 ${
@@ -322,46 +321,62 @@ export default function App() {
           </>
         ) : null}
 
-        {isGameOver ? (
+        {isGameOver && (
           <div>
+            {/* Win celebration animation */}
+            {state.gameState === "won" && showWinAnimation && (
+              <div
+                className={`absolute inset-x-9 top-14 z-10 transition-all duration-700 ease-out ${
+                  dundieVisible
+                    ? "opacity-100 scale-100 translate-y-0"
+                    : "opacity-0 scale-75 -translate-y-4"
+                }`}
+              >
+                <div className="p-12">
+                  <img
+                    src="https://bucketdrum.s3.amazonaws.com/wonDundie.png"
+                    alt="Dundie Award"
+                    className="drop-shadow-lg"
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* Confetti - render separately for better performance */}
+            {state.gameState === "won" && dundieVisible && (
+              <div className="fixed inset-0 pointer-events-none z-20">
+                <Confetti
+                  width={window.innerWidth}
+                  height={window.innerHeight}
+                  recycle={false}
+                  numberOfPieces={200}
+                  gravity={0.3}
+                />
+              </div>
+            )}
+
+            {/* Game over panel */}
             <div
-              role="modal"
-              className={`absolute inset-x-9 top-14 transition-all duration-1000 opacity-1 ${
-                hideDundie ? "opacity-0" : "opacity-100"
-              }`}
-            >
-              {state.gameState === "won"
-                ? (setTimeout(function () {
-                    setHideDundie(true);
-                  }, 6000),
-                  (
-                    <div className="p-12">
-                      <img src="https://bucketdrum.s3.amazonaws.com/wonDundie.png" />
-                      <Confetti width={300} height={400} />
-                    </div>
-                  ))
-                : null}
-            </div>
-            <div
-              role="modal"
-              className={` ${
+              className={`${
                 state.theme === "dark"
                   ? darkTheme[0] + " " + darkTheme[1]
                   : lightTheme[0] + " " + lightTheme[1]
-              } absolute inset-x-0 bottom-0 p-10 text-center mx-auto rounded shadow-lg opacity-90`}
+              } absolute inset-x-0 bottom-0 p-10 text-center mx-auto rounded-t-lg shadow-lg
+                transition-all duration-500 ease-out
+                ${isGameOver ? "translate-y-0 opacity-95" : "translate-y-full opacity-0"}`}
             >
-              <div className="">
+              <div>
                 <WordRow letters={state.answer} />
               </div>
-              <h1 className="pt-4">Next word:</h1>
-              <p>
+              <h1 className="pt-4 font-medium">Next word:</h1>
+              <p className="text-lg tabular-nums">
                 {hours < 0 || minutes < 0 || seconds < 0
                   ? "Come Back Tomorrow!"
-                  : `${hours}:${minutes}:${seconds}`}
+                  : `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`}
               </p>
             </div>
           </div>
-        ) : null}
+        )}
       </div>
     </div>
   );
