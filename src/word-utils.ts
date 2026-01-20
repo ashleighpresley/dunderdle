@@ -96,3 +96,39 @@ export function isValidWord(word: string): boolean {
   // return wordBank.includes(word);
   return wordBank.includes(word) || officeWordBank.includes(word);
 }
+
+export interface HardModeViolation {
+  type: "mustUse" | "mustBeAt";
+  letter: string;
+  position?: number;
+}
+
+export function checkHardMode(
+  guess: string,
+  previousGuesses: { guess: string; result?: LetterState[] }[]
+): HardModeViolation | null {
+  for (const prev of previousGuesses) {
+    if (!prev.result) continue;
+
+    for (let i = 0; i < prev.result.length; i++) {
+      const letter = prev.guess[i];
+      const state = prev.result[i];
+
+      // If letter was a match, it must be in the same position
+      if (state === LetterState.Match) {
+        if (guess[i] !== letter) {
+          return { type: "mustBeAt", letter: letter.toUpperCase(), position: i + 1 };
+        }
+      }
+
+      // If letter was present, it must be used somewhere in the guess
+      if (state === LetterState.Present) {
+        if (!guess.includes(letter)) {
+          return { type: "mustUse", letter: letter.toUpperCase() };
+        }
+      }
+    }
+  }
+
+  return null;
+}

@@ -9,6 +9,8 @@ let curStreak = 0;
 let bestStreak = 0;
 let winDistribution = [0, 0, 0, 0, 0, 0];
 let theme: "light" | "dark" = "light";
+let hardMode = false;
+let colorBlindMode = false;
 
 interface GuessRow {
   guess: string;
@@ -30,6 +32,10 @@ interface StoreState {
   winDistribution: number[];
   theme: "light" | "dark";
   setTheme: (theme: "light" | "dark") => void;
+  hardMode: boolean;
+  setHardMode: (enabled: boolean) => void;
+  colorBlindMode: boolean;
+  setColorBlindMode: (enabled: boolean) => void;
 }
 
 export const useStore = create<StoreState>()(
@@ -112,6 +118,10 @@ export const useStore = create<StoreState>()(
         squares: [],
         theme,
         setTheme: (newTheme: "light" | "dark") => set({ theme: newTheme }),
+        hardMode,
+        setHardMode: (enabled: boolean) => set({ hardMode: enabled }),
+        colorBlindMode,
+        setColorBlindMode: (enabled: boolean) => set({ colorBlindMode: enabled }),
       };
     },
     {

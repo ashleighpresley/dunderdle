@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import Keyboard from "./Keyboard";
 import { useStore, GUESS_LENGTH } from "./store";
-import { isValidWord, LETTER_LENGTH } from "./word-utils";
+import { isValidWord, LETTER_LENGTH, checkHardMode } from "./word-utils";
 import WordRow from "./WordRow";
-import { Info, ChartLine, Share, Moon, Sun, XCircle } from "@phosphor-icons/react";
+import { Info, ChartLine, Share, Moon, Sun, XCircle, Gear } from "@phosphor-icons/react";
 import { StatsChart } from "./StatsChart";
 import { StatsScreen } from "./StatsScreen";
 import { InfoScreen } from "./InfoScreen";
@@ -16,12 +16,18 @@ export default function App() {
   const [guess, setGuess, addGuessLetter] = useGuess();
   const addGuess = useStore((s) => s.addGuess);
   const setTheme = useStore((s) => s.setTheme);
+  const hardMode = useStore((s) => s.hardMode);
+  const setHardMode = useStore((s) => s.setHardMode);
+  const colorBlindMode = useStore((s) => s.colorBlindMode);
+  const setColorBlindMode = useStore((s) => s.setColorBlindMode);
   const previousGuess = usePrevious(guess);
   const [showInvalidGuess, setInvalidGuess] = useState(false);
+  const [hardModeError, setHardModeError] = useState<string | null>(null);
   const [showStatsModal, setShowStatsModal] = useState(false);
   const [showPopupModal, setShowPopupModal] = useState(true);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
+  const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [showWinAnimation, setShowWinAnimation] = useState(false);
   const [dundieVisible, setDundieVisible] = useState(false);
   const [hours, setHours] = useState(10);
@@ -69,7 +75,8 @@ export default function App() {
       setSeconds(timeSeconds);
       setIsLoading(false);
     };
-    setInterval(nextWordCountdown, 1000);
+    const intervalId = setInterval(nextWordCountdown, 1000);
+    return () => clearInterval(intervalId);
   }, []);
 
   useEffect(() => {
@@ -79,6 +86,20 @@ export default function App() {
     }
     return () => clearTimeout(id);
   }, [showInvalidGuess]);
+
+  // Close modals on Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setShowStatsModal(false);
+        setShowInfoModal(false);
+        setShowShareModal(false);
+        setShowSettingsModal(false);
+      }
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, []);
 
   // Handle win animation timing
   useEffect(() => {
@@ -106,15 +127,32 @@ export default function App() {
 
   useEffect(() => {
     if (guess.length === 0 && previousGuess?.length === LETTER_LENGTH) {
-      if (isValidWord(previousGuess)) {
-        addGuess(previousGuess);
-        setInvalidGuess(false);
-      } else {
+      if (!isValidWord(previousGuess)) {
         setInvalidGuess(true);
+        setHardModeError(null);
         setGuess(previousGuess);
+        return;
       }
+
+      // Check hard mode constraints
+      if (hardMode && state.rows.length > 0) {
+        const violation = checkHardMode(previousGuess, state.rows);
+        if (violation) {
+          const errorMsg = violation.type === "mustBeAt"
+            ? `${violation.letter} must be in position ${violation.position}`
+            : `Guess must contain ${violation.letter}`;
+          setHardModeError(errorMsg);
+          setInvalidGuess(true);
+          setGuess(previousGuess);
+          return;
+        }
+      }
+
+      addGuess(previousGuess);
+      setInvalidGuess(false);
+      setHardModeError(null);
     }
-  }, [guess]);
+  }, [guess, hardMode, state.rows]);
 
   let rows = [...state.rows];
 
@@ -146,41 +184,35 @@ export default function App() {
     <div>
       <div className="mx-auto w-96 relative">
         <header className="border-b border-gray-300 pb-2 px-2 my-2 flex flex-col-5 gap-5 justify-center items-center">
-          <Info
-            size={22}
-            onClick={() => {
-              setShowInfoModal(true);
-            }}
-            className={`cursor-pointer transition-colors ${state.theme === "dark" ? "text-white" : "text-black"}`}
-          />
-          <ChartLine
-            size={22}
-            onClick={() => {
-              setShowStatsModal(true);
-            }}
-            className={`cursor-pointer transition-colors ${state.theme === "dark" ? "text-white" : "text-black"}`}
-          />
+          <button
+            onClick={() => setShowInfoModal(true)}
+            aria-label="How to play"
+            className={`cursor-pointer transition-colors hover:opacity-70 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded ${state.theme === "dark" ? "text-white" : "text-black"}`}
+          >
+            <Info size={22} />
+          </button>
+          <button
+            onClick={() => setShowStatsModal(true)}
+            aria-label="View statistics"
+            className={`cursor-pointer transition-colors hover:opacity-70 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded ${state.theme === "dark" ? "text-white" : "text-black"}`}
+          >
+            <ChartLine size={22} />
+          </button>
           <h1 className={`text-4xl text-center tracking-tight transition-colors ${state.theme === "dark" ? "text-white" : "text-black"}`}>Dunderdle</h1>
-          <Share
-            size={22}
-            onClick={() => {
-              setShowShareModal(true);
-            }}
-            className={`cursor-pointer transition-colors ${state.theme === "dark" ? "text-white" : "text-black"}`}
-          />
-          {state.theme === "light" ? (
-            <Moon
-              size={22}
-              onClick={() => setTheme("dark")}
-              className="cursor-pointer transition-colors text-black"
-            />
-          ) : (
-            <Sun
-              size={22}
-              onClick={() => setTheme("light")}
-              className="cursor-pointer transition-colors text-white"
-            />
-          )}
+          <button
+            onClick={() => setShowShareModal(true)}
+            aria-label="Share results"
+            className={`cursor-pointer transition-colors hover:opacity-70 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded ${state.theme === "dark" ? "text-white" : "text-black"}`}
+          >
+            <Share size={22} />
+          </button>
+          <button
+            onClick={() => setShowSettingsModal(true)}
+            aria-label="Settings"
+            className={`cursor-pointer transition-colors hover:opacity-70 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded ${state.theme === "dark" ? "text-white" : "text-black"}`}
+          >
+            <Gear size={22} />
+          </button>
         </header>
 
         <main
@@ -316,6 +348,113 @@ export default function App() {
             <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
           </>
         ) : null}
+
+        {showSettingsModal ? (
+          <>
+            <div
+              className={`justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ${
+                state.theme === "dark" ? darkTheme[1] : lightTheme[1]
+              }`}
+            >
+              <div className="relative w-auto my-6 mx-auto max-w-sm">
+                <div
+                  className={`border-0 rounded-lg shadow-lg relative flex flex-col w-full outline-none focus:outline-none ${
+                    state.theme === "dark" ? darkTheme[0] : lightTheme[0]
+                  }`}
+                >
+                  <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                    <h3 className="text-3xl font-semibold">Settings</h3>
+                    <button
+                      className="font-bold uppercase text-sm px-6 py-3 rounded hover:text-red-700 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                      onClick={() => setShowSettingsModal(false)}
+                    >
+                      <XCircle size={22} />
+                    </button>
+                  </div>
+                  <div className="relative p-6 flex-auto">
+                    <div className="flex flex-col gap-4">
+                      {/* Theme Toggle */}
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          {state.theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+                          <span>Dark Mode</span>
+                        </div>
+                        <button
+                          onClick={() => setTheme(state.theme === "light" ? "dark" : "light")}
+                          className={`relative w-12 h-6 rounded-full transition-colors ${
+                            state.theme === "dark" ? "bg-green-500" : "bg-gray-300"
+                          }`}
+                          aria-label="Toggle dark mode"
+                        >
+                          <span
+                            className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${
+                              state.theme === "dark" ? "translate-x-7" : "translate-x-1"
+                            }`}
+                          />
+                        </button>
+                      </div>
+
+                      {/* Hard Mode Toggle */}
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <span className="font-medium">Hard Mode</span>
+                          <p className="text-xs text-gray-500">Revealed hints must be used in subsequent guesses</p>
+                        </div>
+                        <button
+                          onClick={() => setHardMode(!hardMode)}
+                          disabled={state.rows.length > 0 && !hardMode}
+                          className={`relative w-12 h-6 rounded-full transition-colors ${
+                            hardMode ? "bg-green-500" : "bg-gray-300"
+                          } ${state.rows.length > 0 && !hardMode ? "opacity-50 cursor-not-allowed" : ""}`}
+                          aria-label="Toggle hard mode"
+                        >
+                          <span
+                            className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${
+                              hardMode ? "translate-x-7" : "translate-x-1"
+                            }`}
+                          />
+                        </button>
+                      </div>
+                      {state.rows.length > 0 && !hardMode && (
+                        <p className="text-xs text-orange-600">Hard mode can only be enabled at the start of a game</p>
+                      )}
+
+                      {/* Color Blind Mode Toggle */}
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <span className="font-medium">Color Blind Mode</span>
+                          <p className="text-xs text-gray-500">Use high contrast colors</p>
+                        </div>
+                        <button
+                          onClick={() => setColorBlindMode(!colorBlindMode)}
+                          className={`relative w-12 h-6 rounded-full transition-colors ${
+                            colorBlindMode ? "bg-green-500" : "bg-gray-300"
+                          }`}
+                          aria-label="Toggle color blind mode"
+                        >
+                          <span
+                            className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${
+                              colorBlindMode ? "translate-x-7" : "translate-x-1"
+                            }`}
+                          />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+          </>
+        ) : null}
+
+        {/* Hard mode error message */}
+        {hardModeError && showInvalidGuess && (
+          <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg z-50 animate-bounce">
+            {hardModeError}
+          </div>
+        )}
 
         {isGameOver && (
           <div>

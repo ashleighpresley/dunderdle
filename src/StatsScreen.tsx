@@ -21,5 +21,6 @@ export const StatsScreen = () => {
         <p>Best Streak</p>
       </div>
     </div>
+    
   );
 };
