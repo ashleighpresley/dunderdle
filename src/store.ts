@@ -8,7 +8,7 @@ let winRate = 0;
 let curStreak = 0;
 let bestStreak = 0;
 let winDistribution = [0, 0, 0, 0, 0, 0];
-let theme = "light";
+let theme: "light" | "dark" = "light";
 
 interface GuessRow {
   guess: string;
@@ -28,7 +28,8 @@ interface StoreState {
   curStreak: number;
   bestStreak: number;
   winDistribution: number[];
-  theme: string;
+  theme: "light" | "dark";
+  setTheme: (theme: "light" | "dark") => void;
 }
 
 export const useStore = create<StoreState>()(
@@ -110,6 +111,7 @@ export const useStore = create<StoreState>()(
         winDistribution,
         squares: [],
         theme,
+        setTheme: (newTheme: "light" | "dark") => set({ theme: newTheme }),
       };
     },
     {

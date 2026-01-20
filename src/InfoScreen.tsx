@@ -1,6 +1,7 @@
 import { useState } from "react";
 import WordRow from "./WordRow";
 import theOfficeWordBank from "./the-office-word-bank.json";
+import escapeRoomImg from "./images/office-escape-room.png";
 
 export const InfoScreen = () => {
   const [buttonText, setButtonText] = useState("Click here for a hint");
@@ -69,24 +70,35 @@ export const InfoScreen = () => {
         </p>
         <p>
           Let me know what you think! Send feedback to{" "}
-          <a href="https://twitter.com/ash92596" target="_blank">
-            <u>ash92596</u>.
+          <a href="https://twitter.com/OfficeMemes_" target="_blank">
+            <u>OfficeMemes_</u>.
           </a>
         </p>
-        <p>
-          Join the{" "}
-          <a href="https://www.facebook.com/groups/dunderdle" target="_blank">
-            <u>Dunderdle Facebook group</u>
-          </a>{" "}
-          to post your results and discuss the word of the day!{" "}
+      </div>
+
+      <div className="mt-6 p-4 bg-gradient-to-r from-purple-100 to-indigo-100 rounded-xl border border-purple-200">
+        <p className="font-bold text-center text-purple-800 mb-2">Liked the game?</p>
+        <p className="text-sm text-center text-gray-700 mb-3">
+          Check out our printable <em>The Office</em> themed escape room on Etsy!
         </p>
-        <p>
-          This game will be free but you can{" "}
-          <a href="https://www.buymeacoffee.com/ashleighp" target="_blank">
-            <u>buy me a coffee</u>
-          </a>{" "}
-          if you'd like!
-        </p>
+        <a
+          href="https://threedotdesignsco.etsy.com/listing/1267036037/escape-the-office-pdf-game-escape-room"
+          target="_blank"
+          className="block"
+        >
+          <img
+            src={escapeRoomImg}
+            alt="The Office Escape Room"
+            className="rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition-all duration-300 mx-auto w-48"
+          />
+        </a>
+        <a
+          href="https://threedotdesignsco.etsy.com/listing/1267036037/escape-the-office-pdf-game-escape-room"
+          target="_blank"
+          className="block mt-3 text-center text-sm font-medium text-purple-700 hover:text-purple-900 underline"
+        >
+          Shop ThreeDotDesignsCo
+        </a>
       </div>
     </div>
   );

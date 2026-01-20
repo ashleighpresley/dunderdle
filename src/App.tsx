@@ -15,6 +15,7 @@ export default function App() {
   const state = useStore();
   const [guess, setGuess, addGuessLetter] = useGuess();
   const addGuess = useStore((s) => s.addGuess);
+  const setTheme = useStore((s) => s.setTheme);
   const previousGuess = usePrevious(guess);
   const [showInvalidGuess, setInvalidGuess] = useState(false);
   const [showStatsModal, setShowStatsModal] = useState(false);
@@ -130,21 +131,16 @@ export default function App() {
   const darkTheme = ["bg-slate-600", "text-white"];
   const lightTheme = ["bg-white", "text-black"];
 
-  state.theme === "dark"
-    ? (document.body.classList.add(darkTheme[0]),
-      document
-        .querySelectorAll(".icon")
-        .forEach((el) => el.classList.add(darkTheme[1])),
-      document
-        .querySelectorAll("h1")
-        .forEach((el) => el.classList.add(darkTheme[1])))
-    : (document.body.classList.remove(darkTheme[0]),
-      document
-        .querySelectorAll(".icon")
-        .forEach((el) => el.classList.remove(darkTheme[1])),
-      document
-        .querySelectorAll("h1")
-        .forEach((el) => el.classList.remove(darkTheme[1])));
+  // Apply theme to document
+  useEffect(() => {
+    if (state.theme === "dark") {
+      document.body.classList.add("bg-slate-600");
+      document.body.classList.remove("bg-white");
+    } else {
+      document.body.classList.remove("bg-slate-600");
+      document.body.classList.add("bg-white");
+    }
+  }, [state.theme]);
 
   return (
     <div>
@@ -155,34 +151,34 @@ export default function App() {
             onClick={() => {
               setShowInfoModal(true);
             }}
-            className="cursor-pointer icon"
+            className={`cursor-pointer transition-colors ${state.theme === "dark" ? "text-white" : "text-black"}`}
           />
           <ChartLine
             size={22}
             onClick={() => {
               setShowStatsModal(true);
             }}
-            className="cursor-pointer icon"
+            className={`cursor-pointer transition-colors ${state.theme === "dark" ? "text-white" : "text-black"}`}
           />
-          <h1 className="text-4xl text-center tracking-tight">Dunderdle</h1>
+          <h1 className={`text-4xl text-center tracking-tight transition-colors ${state.theme === "dark" ? "text-white" : "text-black"}`}>Dunderdle</h1>
           <Share
             size={22}
             onClick={() => {
               setShowShareModal(true);
             }}
-            className="cursor-pointer icon"
+            className={`cursor-pointer transition-colors ${state.theme === "dark" ? "text-white" : "text-black"}`}
           />
           {state.theme === "light" ? (
             <Moon
               size={22}
-              onClick={() => (state.theme = "dark")}
-              className="cursor-pointer icon"
+              onClick={() => setTheme("dark")}
+              className="cursor-pointer transition-colors text-black"
             />
           ) : (
             <Sun
               size={22}
-              onClick={() => (state.theme = "light")}
-              className="cursor-pointer icon"
+              onClick={() => setTheme("light")}
+              className="cursor-pointer transition-colors text-white"
             />
           )}
         </header>
@@ -236,7 +232,7 @@ export default function App() {
                       type="button"
                       onClick={() => setShowStatsModal(false)}
                     >
-                      <XCircle size={22} className={"icon"} />
+                      <XCircle size={22} />
                     </button>
                   </div>
                   {/*body*/}
@@ -273,7 +269,7 @@ export default function App() {
                       type="button"
                       onClick={() => setShowInfoModal(false)}
                     >
-                      <XCircle size={22} className={"icon"} />
+                      <XCircle size={22} />
                     </button>
                   </div>
                   {/*body*/}
@@ -307,7 +303,7 @@ export default function App() {
                       type="button"
                       onClick={() => setShowShareModal(false)}
                     >
-                      <XCircle size={22} className={"icon"} />
+                      <XCircle size={22} />
                     </button>
                   </div>
                   {/*body*/}
