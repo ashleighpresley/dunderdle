@@ -1,933 +1,1086 @@
 {
-  "0": [
-    {
-      "word": "boobz",
-      "hint": "Password"
-    }
-  ],
-  "1": [
-    {
-      "word": "scott",
-      "hint": "Last name of one of the characters"
-    }
-  ],
-  "2": [
+  "4/13/2022": [
     {
       "word": "paper",
-      "hint": "It's what it's all about"
+      "day": "0",
+      "hint": "a"
     }
   ],
-  "3": [
+  "4/14/2022": [
+    {
+      "word": "scott",
+      "day": "1",
+      "hint": "a"
+    }
+  ],
+  "4/15/2022": [
+    {
+      "word": "paper",
+      "day": "2",
+      "hint": "a"
+    }
+  ],
+  "4/16/2022": [
     {
       "word": "jello",
-      "hint": "Not a good place to find your stapler"
+      "day": "3",
+      "hint": "a"
     }
   ],
-  "4": [
+  "4/17/2022": [
     {
       "word": "party",
-      "hint": "Michael loves these"
+      "day": "4",
+      "hint": "a"
     }
   ],
-  "5": [
+  "4/18/2022": [
     {
       "word": "leads",
-      "hint": "Michael hides these"
+      "day": "5",
+      "hint": "a"
     }
   ],
-  "6": [
+  "4/19/2022": [
     {
       "word": "kelly",
-      "hint": "First name of one of the characters"
+      "day": "6",
+      "hint": "a"
     }
   ],
-  "7": [
+  "4/20/2022": [
     {
       "word": "oscar",
-      "hint": "First name of one of the characters"
+      "day": "7",
+      "hint": "a"
     }
   ],
-  "8": [
+  "4/21/2022": [
     {
       "word": "beets",
-      "hint": "Dwight"
+      "day": "8",
+      "hint": "a"
     }
   ],
-  "9": [
+  "4/22/2022": [
     {
       "word": "condo",
-      "hint": "Michael owns one of these"
+      "day": "9",
+      "hint": "a"
     }
   ],
-  "10": [
+  "4/23/2022": [
     {
       "word": "rainn",
-      "hint": "First name of one of the actors"
+      "day": "10",
+      "hint": "a"
     }
   ],
-  "11": [
+  "4/24/2022": [
     {
       "word": "holly",
-      "hint": "First name of one of the characters"
+      "day": "11",
+      "hint": "a"
     }
   ],
-  "12": [
+  "4/25/2022": [
     {
       "word": "mafia",
-      "hint": "Belles, Bourbon, and Bullets"
+      "day": "12",
+      "hint": "a"
     }
   ],
-  "13": [
+  "4/26/2022": [
     {
       "word": "creed",
-      "hint": "Almost got fired"
+      "day": "13",
+      "hint": "a"
     }
   ],
-  "14": [
+  "4/27/2022": [
     {
       "word": "farms",
-      "hint": "b&b"
+      "day": "14",
+      "hint": "a"
     }
   ],
-  "15": [
+  "4/28/2022": [
     {
       "word": "gould",
       "day": "15",
-      "hint": "Last name of one of the characters"
+      "hint": "a"
     }
   ],
-  "16": [
+  "4/29/2022": [
     {
       "word": "sales",
-      "hint": "Department"
+      "day": "16",
+      "hint": "a"
     }
   ],
-  "17": [
+  "4/30/2022": [
     {
       "word": "prank",
-      "hint": "There are many great ones of this in the show"
+      "day": "17",
+      "hint": "a"
     }
   ],
-  "18": [
+  "5/1/2022": [
     {
       "word": "wuphf",
-      "hint": "It's an investment"
+      "day": "18",
+      "hint": "a"
     }
   ],
-  "19": [
+  "5/2/2022": [
     {
       "word": "annex",
-      "hint": "It's icky back there"
+      "day": "19",
+      "hint": "a"
     }
   ],
-  "20": [
+  "5/3/2022": [
     {
       "word": "false",
-      "hint": "Catchphrase"
+      "day": "20",
+      "hint": "a"
     }
   ],
-  "21": [
+  "5/4/2022": [
     {
       "word": "stacy",
-      "hint": "Significant other of one of the characters"
+      "day": "21",
+      "hint": "a"
     }
   ],
-  "22": [
+  "5/5/2022": [
     {
       "word": "madge",
-      "hint": "pudge"
+      "day": "22",
+      "hint": "a"
     }
   ],
-  "23": [
+  "5/6/2022": [
     {
       "word": "chili",
-      "hint": "One of the most heart breaking scenes in the entire show involves this"
+      "day": "23",
+      "hint": "a"
     }
   ],
-  "24": [
+  "5/7/2022": [
     {
       "word": "pammy",
-      "hint": "Don't call her this"
+      "day": "24",
+      "hint": "a"
     }
   ],
-  "25": [
+  "5/8/2022": [
     {
       "word": "wonka",
-      "hint": "What is a pallet"
+      "day": "25",
+      "hint": "a"
     }
   ],
-  "26": [
+  "5/9/2022": [
     {
       "word": "dwigt",
-      "hint": "Threat Level Midnight drama"
+      "day": "26",
+      "hint": "a"
     }
   ],
-  "27": [
+  "5/10/2022": [
     {
       "word": "lotto",
-      "hint": "The warehouse won this"
+      "day": "27",
+      "hint": "a"
     }
   ],
-  "28": [
+  "5/11/2022": [
     {
       "word": "chump",
-      "hint": "Episode title in season six"
+      "day": "28",
+      "hint": "a"
     }
   ],
-  "29": [
+  "5/12/2022": [
     {
       "word": "sabre",
-      "hint": "yeahhhhyeahyeah Dunder Mifflin is a part of __________"
+      "day": "29",
+      "hint": "a"
     }
   ],
-  "30": [
+  "5/13/2022": [
     {
       "word": "email",
-      "hint": "You likely use this daily, especially if you work in an office"
+      "day": "30",
+      "hint": "a"
     }
   ],
-  "31": [
+  "5/14/2022": [
     {
       "word": "david",
-      "hint": "Suck it."
+      "day": "31",
+      "hint": "a"
     }
   ],
-  "32": [
+  "5/15/2022": [
     {
       "word": "money",
-      "hint": "Monkey problems? Why would I have monkey problems?"
+      "day": "32",
+      "hint": "a"
     }
   ],
-  "33": [
+  "5/16/2022": [
     {
       "word": "lapin",
-      "hint": "Last name of one of the characters"
+      "day": "33",
+      "hint": "a"
     }
   ],
-  "34": [
+  "5/17/2022": [
     {
       "word": "penny",
-      "hint": "Sibling of one of the characters"
+      "day": "34",
+      "hint": "a"
     }
   ],
-  "35": [
+  "5/18/2022": [
     {
       "word": "schur",
-      "hint": "Last name of one of the actors"
+      "day": "35",
+      "hint": "a"
     }
   ],
-  "36": [
+  "5/19/2022": [
     {
       "word": "karen",
-      "hint": "A branch manager"
+      "day": "36",
+      "hint": "a"
     }
   ],
-  "37": [
+  "5/20/2022": [
     {
       "word": "lover",
-      "hint": "Pams mom, to Michael"
+      "day": "37",
+      "hint": "a"
     }
   ],
-  "38": [
+  "5/21/2022": [
     {
       "word": "pilot",
-      "hint": "The beginning"
+      "day": "38",
+      "hint": "a"
     }
   ],
-  "39": [
+  "5/22/2022": [
     {
       "word": "scarn",
-      "hint": "FBI"
+      "day": "39",
+      "hint": "a"
     }
   ],
-  "40": [
+  "5/23/2022": [
     {
       "word": "clark",
-      "hint": "Dwight's son"
+      "day": "40",
+      "hint": "a"
     }
   ],
-  "41": [
+  "5/24/2022": [
     {
       "word": "china",
-      "hint": "Michael vs. Oscar"
+      "day": "41",
+      "hint": "a"
     }
   ],
-  "42": [
+  "5/25/2022": [
     {
       "word": "bears",
-      "hint": "____, _____, ____________ ____________"
+      "day": "42",
+      "hint": "a"
     }
   ],
-  "43": [
+  "5/26/2022": [
     {
       "word": "vance",
-      "hint": "Keep it cool"
+      "day": "43",
+      "hint": "a"
     }
   ],
-  "44": [
+  "5/27/2022": [
     {
       "word": "disco",
-      "hint": "Everybody dance now"
+      "day": "44",
+      "hint": "a"
     }
   ],
-  "45": [
+  "5/28/2022": [
     {
       "word": "grill",
-      "hint": "Watch out for your foot"
+      "day": "45",
+      "hint": "a"
     }
   ],
-  "46": [
+  "5/29/2022": [
     {
       "word": "broke",
-      "hint": "Michael's monetary situation"
+      "day": "46",
+      "hint": "a"
     }
   ],
-  "47": [
+  "5/30/2022": [
     {
       "word": "pratt",
-      "hint": "College"
+      "day": "47",
+      "hint": "a"
     }
   ],
-  "48": [
+  "5/31/2022": [
     {
       "word": "fires",
-      "hint": "Ryan started one"
+      "day": "48",
+      "hint": "a"
     }
   ],
-  "49": [
+  "6/1/2022": [
     {
       "word": "memos",
-      "hint": "Comes from the Latin word which means 'to be remembered'"
+      "day": "49",
+      "hint": "a"
     }
   ],
-  "50": [
+  "6/2/2022": [
     {
       "word": "utica",
-      "hint": "They better not ever harm a hair on Stanleys head"
+      "day": "50",
+      "hint": "a"
     }
   ],
-  "51": [
+  "6/3/2022": [
     {
       "word": "pudge",
-      "hint": "The warehouse"
+      "day": "51",
+      "hint": "a"
     }
   ],
-  "52": [
+  "6/4/2022": [
     {
       "word": "lumpy",
-      "hint": "Meow"
+      "day": "52",
+      "hint": "a"
     }
   ],
-  "53": [
+  "6/5/2022": [
     {
       "word": "miner",
-      "hint": "Last name of one of the characters"
+      "day": "53",
+      "hint": "a"
     }
   ],
-  "54": [
+  "6/6/2022": [
     {
       "word": "staff",
-      "hint": "A group of employees"
+      "day": "54",
+      "hint": "a"
     }
   ],
-  "55": [
+  "6/7/2022": [
     {
       "word": "faxes",
-      "hint": "An office task"
+      "day": "55",
+      "hint": "a"
     }
   ],
-  "56": [
+  "6/8/2022": [
     {
       "word": "novak",
-      "hint": "Last name of one of the actors"
+      "day": "56",
+      "hint": "a"
     }
   ],
-  "57": [
+  "6/9/2022": [
     {
       "word": "swank",
-      "hint": "Hot or not?"
+      "day": "57",
+      "hint": "a"
     }
   ],
-  "58": [
+  "6/10/2022": [
     {
       "word": "truck",
-      "hint": "Pam and Dwight paint on this"
+      "day": "58",
+      "hint": "a"
     }
   ],
-  "59": [
+  "6/11/2022": [
     {
       "word": "jimbo",
-      "hint": "One of michael's nicknames for Jim"
+      "day": "59",
+      "hint": "a"
     }
   ],
-  "60": [
+  "6/12/2022": [
     {
       "word": "brand",
+      "day": "60",
       "hint": "CEO"
     }
   ],
-  "61": [
+  "6/13/2022": [
     {
       "word": "quits",
+      "day": "61",
       "hint": "Michael does this in season 5."
     }
   ],
-  "62": [
+  "6/14/2022": [
     {
       "word": "baler",
+      "day": "62",
       "hint": "I hardly know her!"
     }
   ],
-  "63": [
+  "6/15/2022": [
     {
       "word": "devon",
+      "day": "63",
       "hint": "First name of one of the characters"
     }
   ],
-  "64": [
+  "6/16/2022": [
     {
       "word": "wendy",
+      "day": "64",
       "hint": "Hot & juicy redhead"
     }
   ],
-  "65": [
+  "6/17/2022": [
     {
       "word": "purse",
+      "day": "65",
       "hint": "Dwight bought one from a salesperson."
     }
   ],
-  "66": [
+  "6/18/2022": [
     {
       "word": "sadiq",
+      "day": "66",
       "hint": "I.T."
     }
   ],
-  "67": [
+  "6/19/2022": [
     {
       "word": "klump",
+      "day": "67",
       "hint": "Body Image Celebration"
     }
   ],
-  "68": [
+  "6/20/2022": [
     {
       "word": "akron",
+      "day": "68",
       "hint": "Branch"
     }
   ],
-  "69": [
+  "6/21/2022": [
     {
       "word": "kevin",
+      "day": "69",
       "hint": "Musically inclined character"
     }
   ],
-  "70": [
+  "6/22/2022": [
     {
       "word": "frame",
+      "day": "70",
       "hint": "Michael tries doing this with Caprese Salad"
     }
   ],
-  "71": [
+  "6/23/2022": [
     {
       "word": "desks",
+      "day": "71",
       "hint": "Piece of office furniture"
     }
   ],
-  "72": [
+  "6/24/2022": [
     {
       "word": "intro",
+      "day": "72",
       "hint": "At the beginning of every episode"
     }
   ],
-  "73": [
+  "6/25/2022": [
     {
       "word": "magic",
+      "day": "73",
       "hint": "Michael lost his corporate card for spending too much money at this kind of shop."
     }
   ],
-  "74": [
+  "6/26/2022": [
     {
       "word": "herrs",
+      "day": "74",
       "hint": "Chips"
     }
   ],
-  "75": [
+  "6/27/2022": [
     {
       "word": "baker",
+      "day": "75",
       "hint": "One of the main actors last name"
     }
   ],
-  "76": [
+  "6/28/2022": [
     {
       "word": "beach",
+      "day": "76",
       "hint": "A location they traveled to away from the office, as a group"
     }
   ],
-  "77": [
+  "6/29/2022": [
     {
       "word": "ellie",
+      "day": "77",
       "hint": "One of the main actors first name"
     }
   ],
-  "78": [
+  "6/30/2022": [
     {
       "word": "beans",
+      "day": "78",
       "hint": "Used to help decide who got a bonus"
     }
   ],
-  "79": [
+  "7/1/2022": [
     {
       "word": "prius",
+      "day": "79",
       "hint": "Dwight is hit by one"
     }
   ],
-  "80": [
+  "7/2/2022": [
     {
       "word": "reams",
+      "day": "80",
       "hint": "The office sells these"
     }
   ],
-  "81": [
+  "7/3/2022": [
     {
       "word": "steve",
+      "day": "81",
       "hint": "One of the main actors first name"
     }
   ],
-  "82": [
+  "7/4/2022": [
     {
       "word": "chair",
+      "day": "82",
       "hint": "Pam needed a new one of these"
     }
   ],
-  "83": [
+  "7/5/2022": [
     {
       "word": "helms",
+      "day": "83",
       "hint": "One of the main actors last name"
     }
   ],
-  "84": [
+  "7/6/2022": [
     {
       "word": "merge",
+      "day": "84",
       "hint": "Scranton does this with the Stamford branch"
     }
   ],
-  "85": [
+  "7/7/2022": [
     {
       "word": "whale",
+      "day": "85",
       "hint": "Episode title in season nine"
     }
   ],
-  "86": [
+  "7/8/2022": [
     {
       "word": "paint",
+      "day": "86",
       "hint": "One of Pam's hobbies"
     }
   ],
-  "87": [
+  "7/9/2022": [
     {
       "word": "fight",
+      "day": "87",
       "hint": "Michael and Dwight do this in season 2"
     }
   ],
-  "88": [
+  "7/10/2022": [
     {
       "word": "brian",
+      "day": "88",
       "hint": "Boom"
     }
   ],
-  "89": [
+  "7/11/2022": [
     {
       "word": "cathy",
+      "day": "89",
       "hint": "Controversial character"
     }
   ],
-  "90": [
+  "7/12/2022": [
     {
       "word": "trick",
+      "day": "90",
       "hint": "Jim likes to do this to Dwight"
     }
   ],
-  "91": [
+  "7/13/2022": [
     {
       "word": "santa",
+      "day": "91",
       "hint": "Phyllis wanted to be this"
     }
   ],
-  "92": [
+  "7/14/2022": [
     {
       "word": "humor",
+      "day": "92",
       "hint": "Ah ____, I have it too."
     }
   ],
-  "93": [
+  "7/15/2022": [
     {
       "word": "shuns",
+      "day": "93",
       "hint": "Dwight does this to Andy"
     }
   ],
-  "94": [
+  "7/16/2022": [
     {
       "word": "twirl",
+      "day": "94",
       "hint": "Michael says he is not going to do this at the important meeting he attends"
     }
   ],
-  "95": [
+  "7/17/2022": [
     {
       "word": "pager",
+      "day": "95",
       "hint": "Dwight wears one of these"
     }
   ],
-  "96": [
+  "7/18/2022": [
     {
       "word": "lonny",
+      "day": "96",
       "hint": "Warehouse"
     }
   ],
-  "97": [
+  "7/19/2022": [
     {
       "word": "danny",
+      "day": "97",
       "hint": "Small character"
     }
   ],
-  "98": [
+  "7/20/2022": [
     {
       "word": "morse",
+      "day": "98",
       "hint": "Dwight, Pam, and Jim all know how to do this"
     }
   ],
-  "99": [
+  "7/21/2022": [
     {
       "word": "joker",
+      "day": "99",
       "hint": "Popular Halloween costume"
     }
   ],
-  "100": [
+  "7/22/2022": [
     {
       "word": "carol",
+      "day": "100",
       "hint": "Recurring character"
     }
   ],
-  "101": [
+  "7/23/2022": [
     {
       "word": "brent",
+      "day": "101",
       "hint": "Last name of one of the guest characters"
     }
   ],
-  "102": [
+  "7/24/2022": [
     {
       "word": "award",
+      "day": "102",
       "hint": "A dundie"
     }
   ],
-  "103": [
+  "7/25/2022": [
     {
       "word": "pizza",
+      "day": "103",
       "hint": "Michael orders this for the office"
     }
   ],
-  "104": [
+  "7/26/2022": [
     {
       "word": "james",
+      "day": "104",
       "hint": "One of the main characters first name"
     }
   ],
-  "105": [
+  "7/27/2022": [
     {
       "word": "speed",
+      "day": "105",
       "hint": "The office takes turns running past something that checks this"
     }
   ],
-  "106": [
+  "7/28/2022": [
     {
       "word": "scuba",
+      "day": "106",
       "hint": "A hobby of Creeds"
     }
   ],
-  "107": [
+  "7/29/2022": [
     {
       "word": "amish",
+      "day": "107",
       "hint": "Dwight's family"
     }
   ],
-  "108": [
+  "7/30/2022": [
     {
       "word": "print",
+      "day": "108",
       "hint": "One of the functions of the copier"
     }
   ],
-  "109": [
+  "7/31/2022": [
     {
       "word": "scene",
+      "day": "109",
       "hint": "There is multiple of these in every episode"
     }
   ],
-  "110": [
+  "8/1/2022": [
     {
       "word": "jenna",
+      "day": "110",
       "hint": "First name of one of the main characters"
     }
   ],
-  "111": [
+  "8/2/2022": [
     {
       "word": "ricky",
+      "day": "111",
       "hint": "First name of someone with a distinct laugh"
     }
   ],
-  "112": [
+  "8/3/2022": [
     {
       "word": "candy",
+      "day": "112",
       "hint": "Can be found at reception or on Kevin's desk"
     }
   ],
-  "113": [
+  "8/4/2022": [
     {
       "word": "globe",
+      "day": "113",
       "hint": "The Office (U.S.) was awarded at least one of these"
     }
   ],
-  "114": [
+  "8/5/2022": [
     {
       "word": "ronni",
+      "day": "114",
       "hint": "Rice-a-"
     }
   ],
-  "115": [
+  "8/6/2022": [
     {
       "word": "funny",
+      "day": "115",
       "hint": "If you watch The Office it's probably because you think it's this"
     }
   ],
-  "116": [
+  "8/7/2022": [
     {
       "word": "lewis",
+      "day": "116",
       "hint": "Last name of one of the characters"
     }
   ],
-  "117": [
+  "8/8/2022": [
     {
       "word": "piano",
+      "day": "117",
       "hint": "Instrument played by at least one of the office characters"
     }
   ],
-  "118": [
+  "8/9/2022": [
     {
       "word": "store",
+      "day": "118",
       "hint": "Was tested"
     }
   ],
-  "119": [
+  "8/10/2022": [
     {
       "word": "green",
+      "day": "119",
       "hint": "Last name of one of the characters"
     }
   ],
-  "120": [
+  "8/11/2022": [
     {
       "word": "mindy",
+      "day": "120",
       "hint": "First name of one of the actors"
     }
   ],
-  "121": [
+  "8/12/2022": [
     {
       "word": "glenn",
+      "day": "121",
       "hint": "First name of one of the characters"
     }
   ],
-  "122": [
+  "8/13/2022": [
     {
       "word": "simms",
+      "day": "122",
       "hint": "Last name of one of the characters"
     }
   ],
-  "123": [
+  "8/14/2022": [
     {
       "word": "movie",
+      "day": "123",
       "hint": "Michael makes one of these"
     }
   ],
-  "124": [
+  "8/15/2022": [
     {
       "word": "punch",
+      "day": "124",
       "hint": "Dwight, to Michaels stomach"
     }
   ],
-  "125": [
+  "8/16/2022": [
     {
       "word": "woods",
+      "day": "125",
       "hint": "Last name of one of the actors"
     }
   ],
-  "126": [
+  "8/17/2022": [
     {
       "word": "smith",
+      "day": "126",
       "hint": "Last name of one of the actors"
     }
   ],
-  "127": [
+  "8/18/2022": [
     {
       "word": "jeans",
+      "day": "127",
       "hint": "Michael loves these"
     }
   ],
-  "128": [
+  "8/19/2022": [
     {
       "word": "steak",
+      "day": "128",
       "hint": "Who wants some man meat?"
     }
   ],
-  "129": [
+  "8/20/2022": [
     {
       "word": "anger",
+      "day": "129",
       "hint": "Andy struggles with this"
     }
   ],
-  "130": [
+  "8/21/2022": [
     {
       "word": "booze",
+      "day": "130",
       "hint": "Cruise"
     }
   ],
-  "131": [
+  "8/22/2022": [
     {
       "word": "fired",
+      "day": "131",
       "hint": "Devon"
     }
   ],
-  "132": [
+  "8/23/2022": [
     {
       "word": "steal",
+      "day": "132",
       "hint": "Creed loves to do this"
     }
   ],
-  "133": [
+  "8/24/2022": [
     {
       "word": "drugs",
+      "day": "132",
       "hint": "Dwight investigates for this"
     }
   ],
-  "134": [
+  "8/25/2022": [
     {
       "word": "finer",
+      "day": "133",
       "hint": "Exclusive club"
     }
   ],
-  "135": [
+  "8/26/2022": [
     {
       "word": "laugh",
+      "day": "134",
       "hint": "Watchers of the office likely do this many times while watching an episode"
     }
   ],
-  "136": [
+  "8/27/2022": [
     {
       "word": "whack",
+      "day": "135",
       "hint": "Dwight and Isabelle play this"
     }
   ],
-  "137": [
+  "8/28/2022": [
     {
       "word": "trout",
+      "day": "136",
       "hint": "Close your mouth sweetie"
     }
   ],
-  "138": [
+  "8/29/2022": [
     {
       "word": "gumby",
-      "day": "138",
+      "day": "137",
       "hint": "Roast for Jim"
     }
   ],
-  "139": [
+  "8/30/2022": [
     {
       "word": "updog",
+      "day": "138",
       "hint": "Nothin much whats up with you"
     }
   ],
-  "140": [
+  "8/31/2022": [
     {
       "word": "lanch",
+      "day": "139",
       "hint": "Misspelt banner"
     }
   ],
-  "141": [
+  "9/1/2022": [
     {
       "word": "caleb",
+      "day": "140",
       "hint": "Belles, Bourbon, and Bullets"
     }
   ],
-  "142": [
+  "9/2/2022": [
     {
       "word": "roast",
+      "day": "141",
       "hint": "Michael organizes one of these for the office"
     }
   ],
-  "143": [
+  "9/3/2022": [
     {
       "word": "joint",
+      "day": "142",
       "hint": "Found in the Dunder Mifflin parking lot"
     }
   ],
-  "144": [
+  "9/4/2022": [
     {
       "word": "donna",
+      "day": "143",
       "hint": "First name of one of the characters"
     }
   ],
-  "145": [
+  "9/5/2022": [
     {
       "word": "radon",
+      "day": "144",
       "hint": "The silent killer"
     }
   ],
-  "146": [
+  "9/6/2022": [
     {
       "word": "craig",
+      "day": "145",
       "hint": "First name of one of the actors"
     }
   ],
-  "147": [
+  "9/7/2022": [
     {
       "word": "marie",
+      "day": "146",
       "hint": "Concierge"
     }
   ],
-  "148": [
+  "9/8/2022": [
     {
       "word": "henry",
+      "day": "147",
       "hint": "Nellies Ex"
     }
   ],
-  "149": [
+  "9/9/2022": [
     {
       "word": "billy",
+      "day": "148",
       "hint": "First name of one of the characters"
     }
   ],
-  "150": [
+  "9/10/2022": [
     {
       "word": "drake",
+      "day": "149",
       "hint": "Name of one the characters kid"
     }
   ],
-  "151": [
+  "9/11/2022": [
     {
       "word": "kenny",
+      "day": "150",
       "hint": "Name of one the characters sibling"
     }
   ],
-  "152": [
+  "9/12/2022": [
     {
       "word": "rehab",
+      "day": "151",
       "hint": "Michael tries to take Meredith here"
     }
   ],
-  "153": [
+  "9/13/2022": [
     {
       "word": "idris",
+      "day": "152",
       "hint": "First name of one of the actors"
     }
   ],
-  "154": [
+  "9/14/2022": [
     {
       "word": "banjo",
+      "day": "153",
       "hint": "Instrument played by one of the characters"
     }
   ]

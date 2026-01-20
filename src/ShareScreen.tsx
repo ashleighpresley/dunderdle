@@ -1,4 +1,5 @@
 import { useStore } from "./store";
+import theOfficeWordBank from "./the-office-word-bank.json";
 
 export const ShareScreen = () => {
   const state = useStore();
@@ -13,10 +14,13 @@ export const ShareScreen = () => {
       });
   }
 
+  const today = new Date().toLocaleDateString("en-US") as string;
+  let day =
+    theOfficeWordBank[today as keyof typeof theOfficeWordBank][0]["day"];
   return (
     <div className="text-center">
       <div id="dunderdle-share">
-        <p>Dunderdle #{state.num}</p>
+        <p>Dunderdle #{day}</p>
         {state.rows.map((row, i) => {
           return (
             <div key={i}>
