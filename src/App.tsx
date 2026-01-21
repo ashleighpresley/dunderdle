@@ -388,8 +388,8 @@ export default function App() {
                           aria-label="Toggle dark mode"
                         >
                           <span
-                            className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${
-                              state.theme === "dark" ? "translate-x-7" : "translate-x-1"
+                            className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform ${
+                              state.theme === "dark" ? "translate-x-6" : "translate-x-0"
                             }`}
                           />
                         </button>
@@ -410,8 +410,8 @@ export default function App() {
                           aria-label="Toggle hard mode"
                         >
                           <span
-                            className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${
-                              hardMode ? "translate-x-7" : "translate-x-1"
+                            className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform ${
+                              hardMode ? "translate-x-6" : "translate-x-0"
                             }`}
                           />
                         </button>
@@ -434,8 +434,8 @@ export default function App() {
                           aria-label="Toggle color blind mode"
                         >
                           <span
-                            className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${
-                              colorBlindMode ? "translate-x-7" : "translate-x-1"
+                            className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform ${
+                              colorBlindMode ? "translate-x-6" : "translate-x-0"
                             }`}
                           />
                         </button>

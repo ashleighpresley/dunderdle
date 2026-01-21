@@ -6,23 +6,12 @@ import theOfficeWordBank from "./the-office-word-bank.json";
 
 export const LETTER_LENGTH = 5;
 
-// Office Wordle Version
-// export function getRandomWord() {
-//   const randomIndex = Math.floor(Math.random() * officeWordBank.length);
-//   return officeWordBank[randomIndex];
-// }
-
 export function getOfficeWord() {
   const today = new Date().toLocaleDateString("en-US") as string;
   let word =
     theOfficeWordBank[today as keyof typeof theOfficeWordBank][0]["word"];
   return word;
 }
-// Normal Wordle Version
-// export function getRandomWord() {
-//   const randomIndex = Math.floor(Math.random() * wordBank.length);
-//   return wordBank[randomIndex];
-// }
 
 export enum LetterState {
   Miss,
