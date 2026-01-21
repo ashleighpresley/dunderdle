@@ -68,7 +68,14 @@ export const InfoScreen = () => {
           </a>{" "}
           themed Wordle game.
         </p>
-        <p>
+        <p className="mt-2">
+          Want more? Try{" "}
+          <a href="https://theofficetriviagame.com" target="_blank">
+            <u>The Office Trivia Game</u>
+          </a>{" "}
+          - an endless trivia challenge where you have 15 seconds to answer each question!
+        </p>
+        <p className="mt-2">
           Let me know what you think! Send feedback to{" "}
           <a href="https://twitter.com/OfficeMemes_" target="_blank">
             <u>OfficeMemes_</u>.
